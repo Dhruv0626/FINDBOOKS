@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 2606;
 const cookieparser = require('cookie-parser');
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
