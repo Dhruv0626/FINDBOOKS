@@ -1,0 +1,467 @@
+
+
+/* General Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: var(--text-color-primary);
+}
+
+.sell-orders-container {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    background-color: #f8f9fa;
+    padding-top: 59px;
+    position: relative;
+}
+
+.sell-orders-page {
+    flex: 1;
+    background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 12px 30px var(--card-shadow-light);
+    margin: 20px;
+    margin-left: 50px; /* Match the width of the side menu */
+    max-width: calc(100% - 310px); /* Account for side menu width and margins */
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+.sell-orders-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.sell-orders-header h1 {
+    font-size: 2.4rem;
+    color: var(--text-color-primary);
+    font-weight: 700;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    
+
+}
+
+.sell-orders-subtitle {
+    color: var(--text-color-muted);
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+
+/* .sell-orders-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+} */
+
+/* Order Card Styles */
+.sell-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.sell-order-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 24px var(--card-shadow-light);
+    padding: 24px;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sell-order-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px var(--card-shadow-dark);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.order-info {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.order-date, .order-amount {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color-muted);
+}
+
+.sell-order-status {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  text-align: center;
+  flex-direction: column;
+  gap:0.75rem;
+}
+.status-pending {
+  background-color: #ffe8b3; /* light orange */
+  color: #8a6d3b;
+  border: 1px solid #ffd27f;
+}
+
+.status-shipped {
+  background-color: #d1ecf1; /* light blue */
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.status-delivered {
+  background-color: #d4edda; /* light green */
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-cancelled {
+  background-color: #f8d7da; /* light red */
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.status-return {
+  background-color: #e6ddf5; /* light purple */
+  color: #4b3d63;
+  border: 1px solid #d3c2ea;
+}
+
+.status-return-request {
+  background-color: #ffe5b4; /* lighter orange */
+  color: #8a5000;
+  border: 1px solid #ffcc80;
+}
+
+.status-marked {
+  background-color: #d2f4ea; /* light teal */
+  color: #155f4b;
+  border: 1px solid #b2e4d3;
+}
+
+.status-default {
+  background-color: #e2e3e5; /* light gray */
+  color: #383d41;
+  border: 1px solid #d6d8db;
+}
+
+/* Order Books Section */
+.order-books {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: hidden;
+    height: fit-content;
+    margin-bottom: 1em;
+}
+
+.order-books h3 {
+    font-size: 1.2rem;
+    color: var(--text-color-primary);
+    margin-bottom: 16px;
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+    width: 100%;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: transform var(--transition-speed) ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.book-card:hover {
+    transform: translateY(-2px);
+    background: #f1f5f9;
+    box-shadow: 0 6px 15px var(--card-shadow-light);
+}
+
+.book-image {
+    width: 100%;
+    height: 160px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #e2e8f0;
+    position: relative;
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-speed) ease;
+    padding: 8px;
+}
+
+.book-image img:hover {
+    transform: scale(1.05);
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.book-details h4 {
+    font-size: 0.9rem;
+    color: #1e293b;
+    margin: 0;
+    font-weight: 600;
+    word-break: break-word;
+    line-height: 1.3;
+    max-height: 2.6em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.book-price {
+    font-size: 0.85rem;
+    color: #3b82f6;
+    font-weight: 600;
+    margin: 0;
+}
+
+.book-quantity {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* No Orders State */
+.no-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    color: #64748b;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cancel-sell-book{
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.6);
+}
+
+.cancel-sell-book:hover{
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    transform: translateY(-3px);
+}
+
+.no-orders h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 16px 0 8px;
+}
+
+.no-orders p {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+    .sell-orders-page {
+        margin: 15px;
+        padding: 30px;
+        max-width: calc(100% - 280px);
+    }
+    
+    .sell-order-card {
+        padding: 20px;
+    }
+    
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 14px;
+    }
+    
+    .book-image {
+        height: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+    .sell-orders-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .sell-orders-page {
+        margin: 10px;
+        margin-left: 0;
+        padding: 25px;
+        width: 90%;
+        max-width: 100%;
+    }
+    
+    .sell-orders-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .order-info {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+    
+    .book-image {
+        height: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sell-orders-page {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .sell-orders-header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .sell-orders-subtitle {
+        font-size: 1rem;
+    }
+    
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+    }
+    
+    .book-image {
+        height: 130px;
+    }
+    
+    .order-info {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .book-details h4 {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sell-orders-page {
+        margin: 5px;
+        padding: 15px;
+    }
+    
+    .sell-orders-header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .book-image {
+        height: 120px;
+    }
+    
+    .book-details h4 {
+        font-size: 0.8rem;
+    }
+    
+    .book-price {
+        font-size: 0.75rem;
+    }
+    
+    .book-quantity {
+        font-size: 0.7rem;
+    }
+}
+
+
+@media (min-width: 1281px) {
+    .sell-orders-page {
+        max-width: calc(100% - 310px);
+    }
+    
+    .sell-orders-header h1 {
+        font-size: 2.4rem;
+    }
+    
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 18px;
+    }
+    
+    .book-image {
+        height: 170px;
+    }
+    
+    .order-info {
+        gap: 32px;
+    }
+}
+

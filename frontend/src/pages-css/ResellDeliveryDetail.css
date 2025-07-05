@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-process-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page Title */
+.delivery-process-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem; /* Responsive font size */
+}
+
+/* Section Styles */
+.order-details {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.order-details h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Responsive font size */
+}
+
+.order-details p {
+    margin: 5px 0;
+    font-size: 1rem; /* Responsive font size */
+    color: #555;
+}
+
+/* OTP Section */
+.otp-section {
+    text-align: center;
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.otp-section input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 1rem; /* Responsive font size */
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.verify-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem; /* Responsive font size */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+}
+
+.verify-button:hover {
+    background: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .delivery-process-container {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .delivery-process-container h1 {
+        font-size: 1.5rem; /* Adjusted for smaller screens */
+    }
+
+    .order-details {
+        padding: 10px;
+    }
+
+    .order-details h2 {
+        font-size: 1.2rem; /* Adjusted for smaller screens */
+    }
+
+    .order-details p {
+        font-size: 0.9rem; /* Adjusted for smaller screens */
+    }
+
+    .otp-section input {
+        font-size: 0.9rem; /* Adjusted for smaller screens */
+    }
+
+    .verify-button {
+        font-size: 0.9rem; /* Adjusted for smaller screens */
+        padding: 10px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .delivery-process-container {
+        padding: 25px;
+    }
+
+    .delivery-process-container h1 {
+        font-size: 2.5rem; /* Adjusted for medium screens */
+    }
+
+    .order-details h2 {
+        font-size: 1.8rem; /* Adjusted for medium screens */
+    }
+}
+
+@media (min-width: 1025px) {
+    .delivery-process-container {
+        padding: 30px;
+    }
+
+    .delivery-process-container h1 {
+        font-size: 3rem; /* Adjusted for larger screens */
+    }
+
+    .order-details h2 {
+        font-size: 2rem; /* Adjusted for larger screens */
+    }
+}

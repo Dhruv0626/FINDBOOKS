@@ -1,0 +1,64 @@
+/* Scroll Animation Styles */
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+
+html {
+    scroll-behavior: smooth;
+  }
+  
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform, opacity;
+  }
+  
+  .scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  /* Section-specific animations */
+  .book-section {
+    transition-delay: 0.2s;
+  }
+  
+  .about-section {
+    transition-delay: 0.4s;
+  }
+  
+  .home-features-section {
+    transition-delay: 0.6s;
+  }
+  
+  /* Child element animations */
+  .scroll-animate .animate-child {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease-out;
+    transition-delay: calc(var(--delay) * 0.1s);
+  }
+  
+  .scroll-animate.visible .animate-child {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .scroll-animate {
+      transform: translateY(15px) scale(0.98);
+    }
+    
+    .scroll-animate.visible {
+      transform: translateY(0) scale(1);
+    }
+  
+    .scroll-animate .animate-child {
+      transform: translateX(0); /* Avoid too much shifting */
+    }
+  }
+  

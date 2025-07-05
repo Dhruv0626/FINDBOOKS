@@ -1,0 +1,348 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI&family=Tahoma&family=Geneva&family=Verdana&display=swap');
+
+/* General Container Styles */
+.payment-container {
+  padding: 2% 5%;
+  background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(57, 73, 171, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(26, 35, 126, 0.05) 0%,
+      transparent 50%
+    );
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  margin: 20px auto;
+}
+
+.payment-container:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Heading Styles */
+.payment-container h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #1a237e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(26, 35, 126, 0.3);
+  transition: color 0.3s ease;
+}
+
+.payment-container h2:hover {
+  color: #3949ab;
+}
+
+/* Search Input */
+.paymentsearch-input {
+  width: 100%;
+  max-width: 40%;
+  padding: 10px 15px;
+  border: 2px solid #1a237e;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  margin-left: 30%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paymentsearch-input:focus {
+  border-color: #3949ab;
+  box-shadow: 0 0 8px rgba(57, 73, 171, 0.5);
+}
+
+.paymentsearch-input:focus-visible {
+  outline: 2px solid #3949ab;
+  outline-offset: 2px;
+  user-select: none;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.table-wrapper:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+/* Payments Table Styling */
+.payment-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.payment-table:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+/* Table Header */
+.payment-table th {
+  background: linear-gradient(45deg, #3949ab, #1a237e);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 18px;
+  letter-spacing: 1.2px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+/* Table Cells */
+.payment-table td {
+  font-size: 1rem;
+  color: #333;
+  padding: 14px 18px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+/* Remove border on last column */
+.payment-table th:last-child,
+.payment-table td:last-child {
+  border-right: none;
+}
+
+/* Zebra Striping */
+.payment-table tbody tr:nth-child(even) {
+  background-color: #f4f6ff;
+}
+
+/* Hover Effect */
+.payment-table tbody tr:hover {
+  background-color: rgba(57, 73, 171, 0.15);
+  cursor: pointer;
+}
+
+/* Action Buttons */
+.payment-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.payment-edit-btn,
+.payment-delete-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.payment-edit-btn {
+  background: linear-gradient(45deg, #ffb300, #ffa000);
+  color: white;
+}
+
+.payment-edit-btn:hover {
+  background: linear-gradient(45deg, #ffa000, #ff8f00);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.6);
+}
+
+.payment-edit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.4);
+}
+
+.payment-edit-btn:focus-visible {
+  outline: 2px solid #ffb300;
+  outline-offset: 2px;
+}
+
+.payment-delete-btn {
+  background: linear-gradient(45deg, #e53935, #d32f2f);
+  color: white;
+}
+
+.payment-delete-btn:hover {
+  background: linear-gradient(45deg, #d32f2f, #c62828);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.6);
+}
+
+.payment-delete-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.4);
+}
+
+.payment-delete-btn:focus-visible {
+  outline: 2px solid #e53935;
+  outline-offset: 2px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .payment-container {
+    padding: 15px;
+  }
+
+  .payment-container h2 {
+    font-size: 22px;
+  }
+
+  .paymentsearch-input {
+    font-size: 14px;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .table-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.15);
+  }
+
+  .payment-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .payment-container {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .payment-container h2 {
+    font-size: 24px;
+  }
+
+  .paymentsearch-input {
+    font-size: 15px;
+    padding: 12px;
+    max-width: 60%;
+    margin-left: 20%;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .payment-container h2 {
+    font-size: 20px;
+  }
+
+  .paymentsearch-input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table-wrapper {
+    border-radius: 5px;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    font-size: 11px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .payment-container h2 {
+    font-size: 18px;
+  }
+
+  .paymentsearch-input {
+    font-size: 12px;
+    padding: 6px;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .payment-container {
+    max-width: 1400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .payment-container h2 {
+    font-size: 20px;
+  }
+
+  .paymentsearch-input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table-wrapper {
+    border-radius: 5px;
+  }
+
+  .payment-table th,
+  .payment-table td {
+    font-size: 11px;
+    padding: 8px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .payment-container {
+    max-width: 1400px;
+  }
+}

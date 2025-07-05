@@ -1,0 +1,13 @@
+{
+  "name": "FindBooks",
+  "short_name": "FindBooks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "serviceworker": {
+    "src": "/src/service-worker.js",
+    "scope": "/",
+    "type": "module"
+  }
+}

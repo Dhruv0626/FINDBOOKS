@@ -1,0 +1,228 @@
+/* General Styling */
+.delivery-detail-container {
+    width: 10%;
+    margin: 20px auto;
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.4s ease-in-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+.delivery-process-container h1 {
+    margin-top: 3%;
+    text-align: center;
+    font-size: 30px;
+    color: #1a237e;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(52, 73, 94, 0.3);
+}
+
+/* Card Styling */
+.order-details {
+    background: #ffffffcc;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(52, 73, 94, 0.1);
+    margin-bottom: 25px;
+    transition: box-shadow 0.3s ease;
+}
+
+.order-details:hover {
+    box-shadow: 0 6px 25px rgba(52, 73, 94, 0.2);
+}
+
+.order-details h2 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #1a237e;
+    padding-bottom: 8px;
+}
+
+.order-details .custom-p-delivery {
+    font-size: 17px;
+    color: #34495e;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* OTP Verification Section */
+.otp-section {
+    background: #ffffffcc;
+    padding: 25px 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(41, 128, 185, 0.15);
+    margin-top: 30px;
+    transition: box-shadow 0.3s ease;
+}
+
+.otp-section:hover {
+    box-shadow: 0 8px 30px rgba(41, 128, 185, 0.25);
+}
+
+.otp-section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.otp-section p {
+    font-size: 16px;
+    color: #1a237e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.otp-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.otp-input {
+    width: 80%;
+    max-width: 280px;
+    padding: 14px 18px;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.otp-input:focus {
+    border-color: #1c5980;
+    outline: none;
+    box-shadow: 0 0 8px #1c5980;
+}
+
+/* Buttons */
+.delivery-button, .submit-button {
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(59, 93, 231, 0.6);
+    background: linear-gradient(45deg, #3b5de7, #1a237e);
+    box-shadow: 0 8px 20px rgba(40, 53, 147, 0.9);
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+.delivery-button:hover, .submit-button:hover {
+      transform: scale(1.05);
+    background: linear-gradient(45deg, #1a237e, #3949ab);
+    box-shadow: 0 6px 14px rgba(42, 71, 199, 0.8)
+}
+
+/* Success Message */
+.otp-success, .delivery-confirmation {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.success-message {
+    color: #27ae60;
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(39, 174, 96, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .delivery-detail-container {
+        width: 85%;
+        padding: 25px 30px;
+    }
+
+    .otp-input {
+        width: 75%;
+    }
+}
+
+@media (max-width: 768px) {
+    .delivery-detail-container {
+        width: 95%;
+        padding: 20px 25px;
+    }
+
+    .delivery-process-container h1 {
+        font-size: 24px;
+    }
+
+    .order-details h2 {
+        font-size: 20px;
+    }
+
+    .order-details .custom-p-delivery {
+        font-size: 15px;
+    }
+
+    .otp-input {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .delivery-button, .submit-button {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .delivery-detail-container {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .delivery-process-container h1 {
+        font-size: 20px;
+    }
+
+    .order-details h2 {
+        font-size: 18px;
+    }
+
+    .order-details .custom-p-delivery {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .otp-input {
+        font-size: 14px;
+        padding: 10px;
+        width: 95%;
+    }
+
+    .delivery-button, .submit-button {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .success-message {
+        font-size: 16px;
+    }
+}
