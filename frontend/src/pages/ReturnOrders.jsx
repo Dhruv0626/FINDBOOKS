@@ -7,12 +7,14 @@ import { useAlert } from "../Context/AlertContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-
 const ReturnOrders = () => {
   const token = Cookies.get("token");
   const [returnOrders, setReturnOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingOrderId, setLoadingOrderId] = useState(null);
+  const [loadingButton, setLoadingButton] = useState({
+    orderId: null,
+    action: null,
+  });
 
   const { showAlert } = useAlert();
   const navigate = useNavigate();
@@ -30,9 +32,8 @@ const ReturnOrders = () => {
             },
           }
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch return orders");
-        }
+        if (!response.ok) throw new Error("Failed to fetch return orders");
+
         const data = await response.json();
         setReturnOrders(data);
       } catch (error) {
@@ -45,12 +46,12 @@ const ReturnOrders = () => {
     fetchReturnOrders();
   }, [navigate, showAlert]);
 
-  const handleStatusUpdate = async (id, status, orderId) => {
-    try {
-      setLoadingOrderId(id); // Start loading for this order
+  const handleStatusUpdate = async (id, status, orderId, action) => {
+    setLoadingButton({ orderId: id, action });
 
+    try {
       // 1. Update return order status
-      const response = await fetch(
+      const res1 = await fetch(
         `${import.meta.env.VITE_RENDER_BACK}/api/returnorder/${id}`,
         {
           method: "PUT",
@@ -63,20 +64,24 @@ const ReturnOrders = () => {
         }
       );
 
-      if (!response.ok) throw new Error("Failed to update return order status");
-      const updatedReturnOrder = await response.json();
+      if (!res1.ok) {
+        const msg = await res1.text();
+        throw new Error("Failed to update return order status: " + msg);
+      }
 
-      // 2. Update main order status
-      const orderStatus =
+      const updatedReturnOrder = await res1.json();
+
+      // 2. If Approved or Rejected, update original order status
+      const newStatus =
         status === "Approved"
           ? "return-pending"
           : status === "Rejected"
           ? "request-rejected"
           : null;
 
-      if (orderStatus && orderId) {
-        const orderUpdateResponse = await fetch(
-          `${import.meta.env.VITE_BACK_URL}/api/${orderId}/Order`,
+      if (orderId && newStatus) {
+        const res2 = await fetch(
+          `${import.meta.env.VITE_RENDER_BACK}/api/${orderId}/Order`,
           {
             method: "PUT",
             headers: {
@@ -84,34 +89,31 @@ const ReturnOrders = () => {
               "Content-Type": "application/json",
             },
             credentials: "include",
-            body: JSON.stringify({ status: orderStatus }),
+            body: JSON.stringify({ status: newStatus }),
           }
         );
-        if (!orderUpdateResponse.ok) {
-          throw new Error("Failed to update main order status");
+
+        if (!res2.ok) {
+          const msg = await res2.text();
+          throw new Error("Failed to update main order status: " + msg);
         }
       }
 
       // 3. Update UI
-      setReturnOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order._id === id ? updatedReturnOrder : order
-        )
+      setReturnOrders((prev) =>
+        prev.map((order) => (order._id === id ? updatedReturnOrder : order))
       );
-
 
       showAlert(`Return order status updated to ${status}`, "success");
     } catch (error) {
       console.error(error);
-      showAlert("Failed to update return order status", "error");
+      showAlert(error.message || "Failed to update return order", "error");
     } finally {
-      setLoadingOrderId(null); // Stop loading
+      setLoadingButton({ orderId: null, action: null });
     }
   };
 
-  if (loading) {
-    return <Load />;
-  }
+  if (loading) return <Load />;
 
   return (
     <div className="return-orders-page">
@@ -123,7 +125,7 @@ const ReturnOrders = () => {
               <th>Order ID</th>
               <th>User Name</th>
               <th>Reason</th>
-              <th>Image </th>
+              <th>Image</th>
               <th>Additional Info</th>
               <th>Status</th>
               <th>Actions</th>
@@ -132,10 +134,7 @@ const ReturnOrders = () => {
           <tbody>
             {returnOrders.length === 0 ? (
               <tr>
-                <td
-                  colSpan="7"
-                  style={{ textAlign: "center", padding: "20px" }}
-                >
+                <td colSpan="7" style={{ textAlign: "center", padding: "20px" }}>
                   No return orders found.
                 </td>
               </tr>
@@ -143,9 +142,7 @@ const ReturnOrders = () => {
               returnOrders.map((order) => (
                 <tr key={order._id}>
                   <td>{order.order_id}</td>
-                  <td>{`${order.userFirstName || ""} ${
-                    order.userLastName || ""
-                  }`}</td>
+                  <td>{`${order.userFirstName || ""} ${order.userLastName || ""}`}</td>
                   <td>{order.reason}</td>
                   <td>
                     {order.image_url ? (
@@ -169,12 +166,17 @@ const ReturnOrders = () => {
                             handleStatusUpdate(
                               order._id,
                               "Approved",
-                              order.order_id
+                              order.order_id,
+                              "accept"
                             )
                           }
-                          disabled={loadingOrderId === order._id}
+                          disabled={
+                            loadingButton.orderId === order._id &&
+                            loadingButton.action === "accept"
+                          }
                         >
-                          {loadingOrderId === order._id
+                          {loadingButton.orderId === order._id &&
+                          loadingButton.action === "accept"
                             ? "Accepting..."
                             : "Accept"}
                         </button>
@@ -185,11 +187,19 @@ const ReturnOrders = () => {
                             handleStatusUpdate(
                               order._id,
                               "Rejected",
-                              order.order_id
+                              order.order_id,
+                              "reject"
                             )
                           }
+                          disabled={
+                            loadingButton.orderId === order._id &&
+                            loadingButton.action === "reject"
+                          }
                         >
-                          Reject
+                          {loadingButton.orderId === order._id &&
+                          loadingButton.action === "reject"
+                            ? "Rejecting..."
+                            : "Reject"}
                         </button>
                       </>
                     ) : (

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     // Function to fetch user data
     const getUser = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}}/api/User?t=${Date.now()}`, {
+            const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User?t=${Date.now()}`, {
                 method: "GET",
                 credentials: "include",
                 headers: {

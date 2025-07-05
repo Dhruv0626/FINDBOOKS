@@ -137,7 +137,7 @@ const AdminDashboard = () => {
               "Content-Type": "application/json",
             },
           }),
-          fetch(`${import.meta.env.VITE_BACK_URL}/api/resellerbook`, {
+          fetch(`${import.meta.env.VITE_RENDER_BACK}/api/resellerbook`, {
             headers: {
               authorization: `Bearer ${token}`,
               "Content-Type": "application/json",

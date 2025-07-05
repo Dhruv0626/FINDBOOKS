@@ -7,7 +7,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { HomeFeatures } from "./HomeFeature";
 import Cookies from "js-cookie";
 
-
 export const Book = () => {
   const token = Cookies.get("token");
   const [bookdata, setBookdata] = useState([]);
@@ -39,7 +38,6 @@ export const Book = () => {
     return () => clearInterval(interval);
   }, [isTransitioning]);
 
-
   const nextSlide = () => {
     setIsTransitioning(true);
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -60,10 +58,8 @@ export const Book = () => {
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
-  // This function fetches book data and reseller book data from the server
   const fetchBook = async () => {
     try {
-      // Fetch both book list and reseller book list at the same time
       const [bookRes, sellOrderRes] = await Promise.all([
         fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Book`, {
           headers: {
@@ -71,7 +67,7 @@ export const Book = () => {
             "Content-Type": "application/json",
           },
         }),
-        fetch(`${import.meta.env.VITE_BACK_URL}/api/resellerbook`, {
+        fetch(`${import.meta.env.VITE_RENDER_BACK}/api/resellerbook`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -79,35 +75,41 @@ export const Book = () => {
         }),
       ]);
 
-      // Convert the responses to JSON format
-      const [bookData, sellOrderData] = await Promise.all([
-        bookRes.json(),
-        sellOrderRes.json(),
-      ]);
+      const bookText = await bookRes.text();
+      const sellText = await sellOrderRes.text();
 
-      // If the data is not in expected format, set empty book data and stop loading
+      let bookData, sellOrderData;
+      try {
+        bookData = JSON.parse(bookText);
+      } catch (e) {
+        throw new Error("Book API did not return valid JSON: " + bookText);
+      }
+
+      try {
+        sellOrderData = JSON.parse(sellText);
+      } catch (e) {
+        throw new Error("Reseller API did not return valid JSON: " + sellText);
+      }
+
       if (!Array.isArray(bookData) || !sellOrderData?.resellers) {
         setBookdata([]);
         setLoading(false);
         return;
       }
 
-      // Save the fetched book data to state
       setBookdata(bookData);
 
-      // Calculate the date 45 days ago from today
       const fourtyfiveDaysAgo = new Date();
       fourtyfiveDaysAgo.setDate(fourtyfiveDaysAgo.getDate() - 45);
 
-      // Filter books published within last 45 days and not old books, set as new arrivals
       setNewArrivals(
         bookData.filter(
           (book) =>
-            new Date(book.Publication_Date) > fourtyfiveDaysAgo && !book.Isoldbook
+            new Date(book.Publication_Date) > fourtyfiveDaysAgo &&
+            !book.Isoldbook
         )
       );
 
-      // Filter books in specific subcategories (comics & novels) and not old books
       setComics(
         bookData.filter(
           (book) =>
@@ -117,7 +119,6 @@ export const Book = () => {
         )
       );
 
-      // Filter books in specific subcategories (academics) and not old books
       setSchoolBooks(
         bookData.filter(
           (book) =>
@@ -127,27 +128,21 @@ export const Book = () => {
         )
       );
 
-      // Get the IDs of reseller books that have status "Pending"
       const pendingBookIds = new Set(
         sellOrderData.resellers
           .filter((reseller) => reseller.Resell_Status === "Pending")
           .map((reseller) => reseller.Book_id)
       );
 
-      // Set resellBooks state to old books whose IDs are in the pendingBookIds set
       setResellBooks(
         bookData.filter(
           (book) => book.Isoldbook && pendingBookIds.has(book._id)
         )
       );
 
-      // Call function to delete old pending books (older than 15 days)
       await deleteOldPendingBooks(bookData, sellOrderData.resellers);
-
-      // Set loading to false after all processing is done
       setLoading(false);
     } catch (error) {
-      // If any error occurs during fetch, log it and set error state
       console.error("Fetch Error:", error);
       setError(error);
       setLoading(false);
@@ -299,10 +294,7 @@ export const Book = () => {
           <section className="welcome-image">
             <div className="hero-content">
               <h1>Welcome to FindBooks</h1>
-              <p>
-                Your ultimate destination for buying and selling books with ease
-                and joy.
-              </p>
+              <p>Your ultimate destination for buying and selling books.</p>
             </div>
           </section>
           {schoolBooks.length > 0 && (
