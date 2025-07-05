@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 import { useLocation } from "react-router-dom";
 
 export const AdminEditBook = ({ UserRole }) => {
@@ -131,7 +133,7 @@ export const AdminEditBook = ({ UserRole }) => {
         }
 
         const response = await fetch(
-          `http://localhost:2606/api/${UserRole}/Book`,
+          `${RENDER_BACK}/api/${UserRole}/Book`,
           {
             method: "POST",
             body: formDataToSend,
@@ -169,7 +171,7 @@ export const AdminEditBook = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/Category`, {
+        const response = await fetch(`${RENDER_BACK}/api/Category`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -204,7 +206,7 @@ export const AdminEditBook = ({ UserRole }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:2606/api/${categoryId}/Subcategory`, {
+        `${RENDER_BACK}/api/${categoryId}/Subcategory`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

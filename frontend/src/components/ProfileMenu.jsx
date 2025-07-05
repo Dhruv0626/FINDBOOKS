@@ -9,6 +9,9 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserCircle } from 'react-icons/fa';
 import Cookies from "js-cookie";
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export function ProfileMenu() {
     const token = Cookies.get("token");
     const [role, setRole] = useState(null);
@@ -19,7 +22,7 @@ export function ProfileMenu() {
     useEffect(() => {
         const GetUser = async () => {
             try {
-                const response = await fetch(`http://localhost:2606/api/User`, {
+                const response = await fetch(`${RENDER_BACK}/api/User`, {
                     credentials: "include",
                     headers: {
                         authorization: `Bearer ${token}`,

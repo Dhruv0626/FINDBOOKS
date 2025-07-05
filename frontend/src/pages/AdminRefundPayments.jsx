@@ -4,6 +4,8 @@ import "../pages-css/AdminRefundPayments.css";
 import Cookies from "js-cookie";
 import { useAlert } from "../Context/AlertContext";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 const AdminRefundPayments = () => {
   const token = Cookies.get("token");
   const [refundPayments, setRefundPayments] = useState([]);
@@ -16,7 +18,7 @@ const AdminRefundPayments = () => {
     const fetchRefundPayments = async () => {
       try {
         const response = await fetch(
-          `http://localhost:2606/api/refunds`,
+          `${RENDER_BACK}/api/refunds`,
           {
             credentials: "include",
             headers: {
@@ -47,7 +49,7 @@ const AdminRefundPayments = () => {
   const handleRefundApproval = async (refundId) => {
     try {
       const response = await fetch(
-        `http://localhost:2606/api/refund/${refundId}`,
+        `${RENDER_BACK}/api/refund/${refundId}`,
         {
           method: "PUT",
           headers: {

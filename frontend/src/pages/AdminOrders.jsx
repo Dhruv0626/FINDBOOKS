@@ -6,6 +6,9 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const AdminOrders = () => {
   const token = Cookies.get("token");
   const [bookdata, setBookdata] = useState([]);
@@ -24,7 +27,7 @@ export const AdminOrders = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/Orders`, {
+        const response = await fetch(`${RENDER_BACK}/api/Orders`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -43,7 +46,7 @@ export const AdminOrders = () => {
 
     const GetUsers = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/AllUser`, {
+        const response = await fetch(`${RENDER_BACK}/api/AllUser`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -61,7 +64,7 @@ export const AdminOrders = () => {
 
     const fetchBook = async () => {
       try {
-        const res = await fetch(`http://localhost:2606/api/Book`, {
+        const res = await fetch(`${RENDER_BACK}/api/Book`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

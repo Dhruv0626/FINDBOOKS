@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const AdminBookForm = ({ UserRole }) => {
   const token = Cookies.get("token");
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
-  const [errors, setErrors] = useState({}); // Store validation errors
+  const [errors, setErrors] = useState({});
   const { showAlert } = useAlert();
 
   const [formData, setFormData] = useState({
@@ -30,21 +32,10 @@ export const AdminBookForm = ({ UserRole }) => {
     Class: "",
   });
 
-  // Hardcoded options for new dropdowns
   const boardOptions = ["CBSE", "ICSE", "Other"];
   const classOptions = [
-    "Class 1",
-    "Class 2",
-    "Class 3",
-    "Class 4",
-    "Class 5",
-    "Class 6",
-    "Class 7",
-    "Class 8",
-    "Class 9",
-    "Class 10",
-    "Class 11",
-    "Class 12",
+    "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6",
+    "Class 7", "Class 8", "Class 9", "Class 10", "Class 11", "Class 12",
   ];
 
   const handleSubmit = async (e) => {
@@ -54,20 +45,14 @@ export const AdminBookForm = ({ UserRole }) => {
     if (!formData.BookName.trim()) newErrors.BookName = "Book Name is required";
     if (!formData.Author.trim()) newErrors.Author = "Author is required";
     if (!formData.Edition.trim()) newErrors.Edition = "Edition is required";
-    if (!formData.Publication_Date)
-      newErrors.Publication_Date = "Publication Date is required";
-    if (!formData.Publisher.trim())
-      newErrors.Publisher = "Publisher is required";
-    if (!formData.Description.trim())
-      newErrors.Description = "Description is required";
-    if (!formData.Price || formData.Price <= 0)
-      newErrors.Price = "Price must be greater than 0";
-    if (formData.Quantity === "" || formData.Quantity < 0)
-      newErrors.Quantity = "Quantity must be a non-negative number";
+    if (!formData.Publication_Date) newErrors.Publication_Date = "Publication Date is required";
+    if (!formData.Publisher.trim()) newErrors.Publisher = "Publisher is required";
+    if (!formData.Description.trim()) newErrors.Description = "Description is required";
+    if (!formData.Price || formData.Price <= 0) newErrors.Price = "Price must be greater than 0";
+    if (formData.Quantity === "" || formData.Quantity < 0) newErrors.Quantity = "Quantity must be a non-negative number";
     if (!formData.ISBN.trim()) newErrors.ISBN = "ISBN is required";
     if (!formData.Category) newErrors.Category = "Category is required";
-    if (!formData.SubCategory)
-      newErrors.SubCategory = "Subcategory is required";
+    if (!formData.SubCategory) newErrors.SubCategory = "Subcategory is required";
 
     const selectedSubcategory = subcategories.find(
       (sub) => sub._id === formData.SubCategory
@@ -104,7 +89,7 @@ export const AdminBookForm = ({ UserRole }) => {
         }
 
         const response = await fetch(
-          `http://localhost:2606/api/${UserRole}/Book`,
+          `${RENDER_BACK}/api/${UserRole}/Book`,
           {
             method: "POST",
             body: formDataToSend,
@@ -115,7 +100,6 @@ export const AdminBookForm = ({ UserRole }) => {
           }
         );
 
-        // Handle response errors
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -130,10 +114,7 @@ export const AdminBookForm = ({ UserRole }) => {
         }
       } catch (error) {
         console.error("Error occurred during submission:", error);
-        showAlert(
-          "An error occurred. Please check the console for details.",
-          "error"
-        );
+        showAlert("An error occurred. Please check the console for details.", "error");
       }
     }
   };
@@ -141,7 +122,7 @@ export const AdminBookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/Category`, {
+        const response = await fetch(`${RENDER_BACK}/api/Category`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -172,21 +153,21 @@ export const AdminBookForm = ({ UserRole }) => {
       SubCategory: "",
       Board: "",
       Class: "",
-    })); // Clear errors when user selects category
+    }));
 
     try {
       const response = await fetch(
-        `http://localhost:2606/api/${categoryId}/Subcategory`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
+        `${RENDER_BACK}/api/${categoryId}/Subcategory`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const data = await response.json();
       setSubcategories(Array.isArray(data) ? data : []);
     } catch (error) {
-      //console.error("Error fetching subcategories:", error);
       setSubcategories([]);
     }
   };
@@ -194,7 +175,7 @@ export const AdminBookForm = ({ UserRole }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear errors on input change
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
   const handleImageChange = (e) => {
@@ -202,7 +183,6 @@ export const AdminBookForm = ({ UserRole }) => {
     setFormData((prev) => ({ ...prev, image: file }));
   };
 
-  // Find selected subcategory name for conditional rendering
   const selectedSubcategory = subcategories.find(
     (sub) => sub._id === formData.SubCategory
   );

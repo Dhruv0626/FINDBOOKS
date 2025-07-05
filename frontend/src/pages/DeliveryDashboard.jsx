@@ -7,6 +7,7 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 const DeliverypersonRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -61,7 +62,7 @@ const DeliveryDashboard = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/Orders`, {
+        const response = await fetch(`${RENDER_BACK}/api/Orders`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -83,7 +84,7 @@ const DeliveryDashboard = () => {
 
     const getSellOrder = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/SellOrder`, {
+        const response = await fetch(`${RENDER_BACK}/api/SellOrder`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,

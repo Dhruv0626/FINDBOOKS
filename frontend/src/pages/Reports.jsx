@@ -8,6 +8,8 @@ import Load from "../components/Load"
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 const Reports = () => {
   const token = Cookies.get("token");
   const { user, loading } = useAuth();
@@ -19,7 +21,7 @@ const Reports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/report`, {
+        const response = await fetch(`${RENDER_BACK}/api/report`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -42,7 +44,7 @@ const Reports = () => {
 
   const downloadReport = async (reportId) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/report/${reportId}/download`, {
+      const response = await fetch(`${RENDER_BACK}/api/report/${reportId}/download`, {
         credentials: "include",
         headers: {
           authorization: `Bearer ${token}`,

@@ -4,6 +4,7 @@ import { useViewOrder } from "../Context/OrderDetail";
 import { useNavigate } from "react-router-dom";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+
 export const AdminViewOrder = () => {
   const { orderDetails } = useViewOrder();
   const navigate = useNavigate();

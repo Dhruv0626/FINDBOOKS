@@ -29,6 +29,8 @@ import "jspdf-autotable";
 import { autoTable } from "jspdf-autotable";
 import { useAlert } from "../Context/AlertContext";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) {
@@ -72,7 +74,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const GetUser = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/User`, {
+        const response = await fetch(`${RENDER_BACK}/api/User`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -92,7 +94,7 @@ const AdminDashboard = () => {
     GetUser();
     const getOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/Orders`, {
+        const response = await fetch(`${RENDER_BACK}/api/Orders`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -111,7 +113,7 @@ const AdminDashboard = () => {
 
     const GetUsers = async () => {
       try {
-        const response = await fetch(`http://localhost:2606/api/AllUser`, {
+        const response = await fetch(`${RENDER_BACK}/api/AllUser`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -131,7 +133,7 @@ const AdminDashboard = () => {
     const fetchBook = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`http://localhost:2606/api/Book`, {
+          fetch(`${RENDER_BACK}/api/Book`, {
             headers: {
               authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
@@ -167,7 +169,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const getRevenue = async () => {
       try {
-        const res = await fetch(`http://localhost:2606/api/verify`, {
+        const res = await fetch(`${RENDER_BACK}/api/verify`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -217,7 +219,7 @@ const AdminDashboard = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:2606/api/${orderId}/Order`,
+          `${RENDER_BACK}/api/${orderId}/Order`,
           {
             method: "PUT",
             headers: {
@@ -274,7 +276,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:2606/api/report/generate`,
+        `${RENDER_BACK}/api/report/generate`,
         {
           method: "POST",
           headers: {

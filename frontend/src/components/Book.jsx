@@ -7,6 +7,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { HomeFeatures } from "./HomeFeature";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const Book = () => {
   const token = Cookies.get("token");
   const [bookdata, setBookdata] = useState([]);
@@ -63,7 +65,7 @@ export const Book = () => {
     try {
       // Fetch both book list and reseller book list at the same time
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch(`http://localhost:2606/api/Book`, {
+        fetch(`${RENDER_BACK}/api/Book`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -170,7 +172,7 @@ export const Book = () => {
       if (reseller) {
         try {
           await fetch(
-            `http://localhost:2606/api/resellerbook/${reseller._id}`,
+            `${RENDER_BACK}/api/resellerbook/${reseller._id}`,
             {
               method: "DELETE",
               headers: {

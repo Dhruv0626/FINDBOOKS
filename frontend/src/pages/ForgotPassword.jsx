@@ -4,6 +4,8 @@ import "../pages-css/ForgotPassword.css";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 function ForgotPassword() {
   const token = Cookies.get("token");
   const [email, setEmail] = useState("");
@@ -51,7 +53,7 @@ function ForgotPassword() {
     setSendingOtp(true);
 
     try {
-      await fetch(`${import.meta.env.VITE_BACK_URL}/api/${"forgotpassword"}/forgot-password`, {
+      await fetch(`${RENDER_BACK}/api/${"forgotpassword"}/forgot-password`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -80,7 +82,7 @@ function ForgotPassword() {
 
     setOtpError("");
 
-    const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/verify-otp`, {
+    const res = await fetch(`${RENDER_BACK}/api/verify-otp`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
@@ -109,7 +111,7 @@ function ForgotPassword() {
 
     setPasswordError("");
 
-    const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/reset-password`, {
+    const response = await fetch(`${RENDER_BACK}/api/reset-password`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,

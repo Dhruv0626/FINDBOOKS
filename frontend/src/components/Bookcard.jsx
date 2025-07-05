@@ -3,6 +3,8 @@ import "../components-css/Bookcard.css";
 import Cookies from "js-cookie";
 import {formatIndianNumberWithoutDecimal} from "../utils/formatIndianNumber"
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const Bookcard = ({ book }) => {
     const token = Cookies.get("token");
 
@@ -19,7 +21,7 @@ export const Bookcard = ({ book }) => {
         }
         else{
             try {
-                const response = await fetch(`http://localhost:2606/api/Cart`, {
+                const response = await fetch(`${RENDER_BACK}/api/Cart`, {
                     method: "POST",
                     headers: {
                         authorization: `Bearer ${token}`,
@@ -47,7 +49,7 @@ export const Bookcard = ({ book }) => {
                     <div className="book-card-contant">
                         {book.Isoldbook ? <div className="old-lable">Resell</div> : <div className="lable">New</div>}
                         <div className="book-img">
-                            <img src={`http://localhost:2606/${book.BookImageURL}`} alt={book.BookName} className="book-card-img"/>
+                            <img src={`${RENDER_BACK}/${book.BookImageURL}`} alt={book.BookName} className="book-card-img"/>
                         </div>
                         <div className="book-detail">
                             <h2 className="book-name">

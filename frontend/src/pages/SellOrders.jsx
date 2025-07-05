@@ -8,6 +8,8 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const SellOrders = () => {
   const token = Cookies.get("token");
   const [books, setBooks] = useState([]);
@@ -19,7 +21,7 @@ export const SellOrders = () => {
   useEffect(() => {
     const getSellOrder = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/SellOrders`, {
+        const response = await fetch(`${RENDER_BACK}/api/SellOrders`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -44,7 +46,7 @@ export const SellOrders = () => {
 
  const updatestatus = async (resellerid, bookid) => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/Book`, {
+    const response = await fetch(`${RENDER_BACK}/api/Book`, {
       method: 'DELETE',
       headers: {
         authorization: `Bearer ${token}`,
@@ -69,7 +71,7 @@ export const SellOrders = () => {
 
   setTimeout(async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/ResellerPaymentForm/${resellerid}`, {
+      const response = await fetch(`${RENDER_BACK}/api/ResellerPaymentForm/${resellerid}`, {
         method: 'DELETE',
         headers: {
           authorization: `Bearer ${token}`,
@@ -169,7 +171,7 @@ export const SellOrders = () => {
                             <div className="book-card">
                               <div className="book-image">
                                 <img
-                                  src={`http://localhost:2606/${bookdata.BookImageURL}`}
+                                  src={`${RENDER_BACK}${bookdata.BookImageURL}`}
                                   alt={bookdata.BookName}
                                 />
                               </div>

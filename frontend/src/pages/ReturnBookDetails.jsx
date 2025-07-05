@@ -4,6 +4,8 @@ import "../pages-css/DeliveryDetail.css";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const ReturnBookDetails = () => {
   const token = Cookies.get("token");
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ export const ReturnBookDetails = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACK_URL}/api/deliverydetail/forgot-password`,
+        `${RENDER_BACK}/api/deliverydetail/forgot-password`,
         {
           method: "POST",
           headers: {
@@ -75,7 +77,7 @@ export const ReturnBookDetails = () => {
   const handleVerifyOtp = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACK_URL}/api/verify-otp`,
+        `${RENDER_BACK}/api/verify-otp`,
         {
           method: "POST",
           headers: {
@@ -102,7 +104,7 @@ export const ReturnBookDetails = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACK_URL}/api/resend-otp`,
+        `${RENDER_BACK}/api/resend-otp`,
         {
           method: "POST",
           headers: {
@@ -127,7 +129,7 @@ export const ReturnBookDetails = () => {
   const updateReturnStatus = async (orderId, newStatus) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACK_URL}/api/${orderId}/Order`,
+        `${RENDER_BACK}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: {

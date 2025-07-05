@@ -5,6 +5,8 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 
 export const ManageBooks = () => {
   const token = Cookies.get("token");
@@ -16,7 +18,7 @@ export const ManageBooks = () => {
 
   const fetchBook = async () => {
     try {
-      const bookRes = await fetch(`${import.meta.env.VITE_BACK_URL}/api/Book`, {
+      const bookRes = await fetch(`${RENDER_BACK}/api/Book`, {
         headers: {
           authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -49,7 +51,7 @@ export const ManageBooks = () => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/Book`, {
+      const response = await fetch(`${RENDER_BACK}/api/Book`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${token}`,
@@ -121,7 +123,7 @@ export const ManageBooks = () => {
                         <td className="centered">{index + 1}</td>
                         <td>
                           <img
-                            src={`http://localhost:2606/${product.BookImageURL}`}
+                            src={`${RENDER_BACK}/${product.BookImageURL}`}
                             alt={product.BookName.length > 15
                             ? product.BookName.slice(0, 15) + "..."
                             : product.BookName}

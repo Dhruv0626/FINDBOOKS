@@ -4,6 +4,9 @@ import "../pages-css/AdminAddUser.css";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const AdminEditUser = () => {
   const token = Cookies.get("token");
   const navigate = useNavigate();
@@ -51,7 +54,7 @@ export const AdminEditUser = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:2606/api/User`, {
+      const response = await fetch(`${RENDER_BACK}/api/User`, {
         method: "PUT",
         headers: {
           authorization: `Bearer ${token}`,

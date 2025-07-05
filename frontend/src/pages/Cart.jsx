@@ -10,6 +10,9 @@ import Cookies from "js-cookie";
 import {formatIndianNumberWithoutDecimal} from "../utils/formatIndianNumber"
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const Cart = () => {
     const token = Cookies.get("token");
     const [carts, setCarts] = useState([]);
@@ -22,7 +25,7 @@ export const Cart = () => {
 
     const handleRemoveItem = async (bookid) => {
         try {
-            const response = await fetch(`http://localhost:2606/api/Cart`, {
+            const response = await fetch(`${RENDER_BACK}/api/Cart`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -58,7 +61,7 @@ export const Cart = () => {
         const fetchCarts = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:2606/api/Cart`, {
+                const response = await fetch(`${RENDER_BACK}/api/Cart`, {
                     credentials: "include",
                     headers: {
                         authorization: `Bearer ${token}`,
@@ -88,7 +91,7 @@ export const Cart = () => {
 
     const handleQuantityChange = async (bookid, action) => {
         try {
-            const response = await fetch(`http://localhost:2606/api/updatequantity`, {
+            const response = await fetch(`${RENDER_BACK}/api/updatequantity`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -119,7 +122,7 @@ export const Cart = () => {
 
     const clearcart = async() => {
         try {
-            const response = await fetch(`http://localhost:2606/api/Cart`, {
+            const response = await fetch(`${RENDER_BACK}/api/Cart`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${token}`,

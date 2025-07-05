@@ -7,6 +7,9 @@ import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress";
 import Cookies from "js-cookie";
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const Payment = () => {
   const [OrderData, setOrderData] = useState();
   const [paymentMethod, setPaymentMethod] = useState("Online");
@@ -32,7 +35,7 @@ export const Payment = () => {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyResponse = await fetch(`${import.meta.env.VITE_BACK_URL}/api/verify`, {
+          const verifyResponse = await fetch(`${RENDER_BACK}/api/verify`, {
             method: "POST",
             headers: { authorization: `Bearer ${token}`,"Content-Type": "application/json" },
             body: JSON.stringify({
@@ -74,7 +77,7 @@ export const Payment = () => {
 
   const payment = async () => {
     try {
-    const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/orders`, {
+    const response = await fetch(`${RENDER_BACK}/api/orders`, {
         method: "POST",
         headers: {authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({ amount: total  + deliveryCharge }),
@@ -94,7 +97,7 @@ export const Payment = () => {
 
   const addorder = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/addorder`, {
+      const response = await fetch(`${RENDER_BACK}/api/addorder`, {
         method: "PUT",
         headers: { authorization: `Bearer ${token}`,"Content-Type": "application/json" },
         body: JSON.stringify({
@@ -115,7 +118,7 @@ export const Payment = () => {
 
   const clearcart = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_BACK_URL}/api/Cart`, {
+      await fetch(`${RENDER_BACK}/api/Cart`, {
         method: "DELETE",
         headers: { authorization: `Bearer ${token}`,"Content-Type": "application/json" },
         credentials: "include",
@@ -128,7 +131,7 @@ export const Payment = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/CurrentOrder`, {
+        const response = await fetch(`${RENDER_BACK}/api/CurrentOrder`, {
                   headers: { authorization: `Bearer ${token}`,"Content-Type": "application/json" },
                   credentials: "include",
         });
@@ -187,7 +190,7 @@ export const Payment = () => {
         return;
       }
 
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/credit/codpayment`, {
+      const response = await fetch(`${RENDER_BACK}/api/credit/codpayment`, {
         method: "POST",
         headers: { authorization: `Bearer ${token}`,"Content-Type": "application/json" },
         body: JSON.stringify({

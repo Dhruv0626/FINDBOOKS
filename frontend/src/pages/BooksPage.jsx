@@ -6,6 +6,9 @@ import { Bookcard } from "../components/Bookcard";
 import { FilterComponent } from "../components/Filter";
 import Cookies from "js-cookie";
 
+
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 export const BooksPage = () => {
   const token = Cookies.get("token");
   const { category, subcategory } = useParams();
@@ -18,13 +21,13 @@ export const BooksPage = () => {
     const fetchBooks = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`http://localhost:2606/api/${subcategory}/Books`, {
+          fetch(`${RENDER_BACK}/api/${subcategory}/Books`, {
             headers: {
               authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
           }),
-          fetch(`${import.meta.env.VITE_BACK_URL}/api/resellerbook`, {
+          fetch(`${RENDER_BACK}/api/resellerbook`, {
             headers: {
               authorization: `Bearer ${token}`,
               "Content-Type": "application/json",

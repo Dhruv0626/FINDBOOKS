@@ -5,6 +5,8 @@ import { useCart } from "../Context/order";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
+const RENDER_BACK = import.meta.env.RENDER_BACK;
+
 // Delivery charges array to validate pincodes
 export const deliveryChargesArray = [
   { pincode: "380001", charge: 25 },
@@ -163,7 +165,7 @@ export const Useraddress = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/Order`, {
+      const response = await fetch(`${RENDER_BACK}/api/Order`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
