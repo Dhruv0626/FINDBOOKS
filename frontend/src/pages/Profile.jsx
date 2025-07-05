@@ -7,8 +7,6 @@ import { useState, useEffect } from "react";
 import { Plus, Mail, Phone, User, Calendar } from "lucide-react";
 import Load from "../components/Load";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const Profile = () => {
     const token = Cookies.get("token");
     const navigate = useNavigate();
@@ -23,7 +21,7 @@ export const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch(`${RENDER_BACK}/api/profile`, {
+                const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/profile`, {
                     credentials: "include",
                     headers: {
                         authorization: `Bearer ${token}`,

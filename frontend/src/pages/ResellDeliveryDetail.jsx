@@ -5,7 +5,6 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import { formatIndianNumber } from "../utils/formatIndianNumber";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const ResellDeliveryDetail = () => {
   const token = Cookies.get("token");
@@ -56,7 +55,7 @@ export const ResellDeliveryDetail = () => {
 
     try {
       const res = await fetch(
-        `${RENDER_BACK}/api/deliverydetail/forgot-password`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/deliverydetail/forgot-password`,
         {
           method: "POST",
           headers: {
@@ -84,7 +83,7 @@ export const ResellDeliveryDetail = () => {
   const handleVerifyOtp = async () => {
     try {
       const res = await fetch(
-        `${RENDER_BACK}/api/verify-otp`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/verify-otp`,
         {
           method: "POST",
           headers: {
@@ -111,7 +110,7 @@ export const ResellDeliveryDetail = () => {
 
     try {
       const res = await fetch(
-        `${RENDER_BACK}/api/resend-otp`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/resend-otp`,
         {
           method: "POST",
           headers: {
@@ -136,7 +135,7 @@ export const ResellDeliveryDetail = () => {
   const updateOrderStatus = async (resellerid, newStatus) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/SellOrders`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/SellOrders`,
         {
           method: "PUT",
           headers: {
@@ -158,7 +157,7 @@ export const ResellDeliveryDetail = () => {
         // Call email API to send book collection confirmation
         try {
           const emailResponse = await fetch(
-            `${RENDER_BACK}/api/send-resell-delivery-email`,
+            `${import.meta.env.VITE_RENDER_BACK}/api/send-resell-delivery-email`,
             {
               method: "POST",
               headers: {

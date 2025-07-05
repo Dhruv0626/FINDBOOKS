@@ -3,7 +3,6 @@ import "../pages-css/ViewPayment.css";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const ViewPayment = () => {
     const token = Cookies.get("token");
@@ -13,7 +12,7 @@ export const ViewPayment = () => {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await fetch(`${RENDER_BACK}/api/verify`, {
+                const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/verify`, {
                     credentials: "include",
                     headers: {
                         authorization: `Bearer ${token}`,

@@ -5,7 +5,6 @@ import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const ResellerPaymentForm = () => {
   const token = Cookies.get("token");
@@ -86,7 +85,7 @@ export const ResellerPaymentForm = () => {
 
     try {
       // POST book data to API
-      const response = await fetch(`${RENDER_BACK}/api/${UserRole}/Book`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/${UserRole}/Book`, {
         method: "POST",
         body: formDataToSend,
         credentials: "include",
@@ -103,7 +102,7 @@ export const ResellerPaymentForm = () => {
         const bookid = json.book._id;
 
         // Now POST payment form data with bookid
-        const paymentResponse = await fetch(`${RENDER_BACK}/api/ResellerPaymentForm`, {
+        const paymentResponse = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/ResellerPaymentForm`, {
           method: "POST",
           headers: {
             authorization: `Bearer ${token}`,

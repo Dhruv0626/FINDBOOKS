@@ -3,7 +3,6 @@ import "../pages-css/AddCat.css";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const AddCat = () => {
   const token = Cookies.get("token");
@@ -19,7 +18,7 @@ export const AddCat = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${RENDER_BACK}/api/Category`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Category`, {
         headers: {
           authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -35,7 +34,7 @@ export const AddCat = () => {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${RENDER_BACK}/api/Category`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Category`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -62,7 +61,7 @@ export const AddCat = () => {
       return;
     }
     try {
-      const response = await fetch(`${RENDER_BACK}/api/Subcategory`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Subcategory`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,

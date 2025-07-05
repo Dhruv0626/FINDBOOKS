@@ -4,7 +4,6 @@ import "../pages-css/DeliveryDetail.css";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const DeliveryDetail = () => {
   const token = Cookies.get("token");
@@ -48,7 +47,7 @@ export const DeliveryDetail = () => {
     setSendingOtp(true); // START loading
     try {
       const res = await fetch(
-        `${RENDER_BACK}/api/deliverydetail/forgot-password`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/deliverydetail/forgot-password`,
         {
           method: "POST",
           headers: {
@@ -76,7 +75,7 @@ export const DeliveryDetail = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch(`${RENDER_BACK}/api/verify-otp`, {
+      const res = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/verify-otp`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -100,7 +99,7 @@ export const DeliveryDetail = () => {
     if (timer > 0) return;
 
     try {
-      const res = await fetch(`${RENDER_BACK}/api/resend-otp`, {
+      const res = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/resend-otp`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -124,7 +123,7 @@ export const DeliveryDetail = () => {
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/${orderId}/Order`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: {
@@ -146,7 +145,7 @@ export const DeliveryDetail = () => {
 
     if (paymentdetail[0].payment_method === "COD") {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/codpayment`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/codpayment`, {
           method: "PUT",
           headers: {
             authorization: `Bearer ${token}`,

@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import "../pages-css/Category.css";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const Category = () => {
     const token = Cookies.get("token");
     const [categories, setCategories] = useState([]);
@@ -13,7 +11,7 @@ export const Category = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(`${RENDER_BACK}/api/Category`, {
+                const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Category`, {
                     headers: {
                         authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
@@ -34,7 +32,7 @@ export const Category = () => {
         await Promise.all(
             categories.map(async (category) => {
                 try {
-                    const response = await fetch(`${RENDER_BACK}/api/${category._id}/Subcategory`, {
+                    const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/${category._id}/Subcategory`, {
                         headers: {
                             authorization: `Bearer ${token}`,
                             "Content-Type": "application/json",

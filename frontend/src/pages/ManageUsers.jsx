@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
-
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const ManageUsers = () => 
   {
   const token = Cookies.get("token");
@@ -21,7 +18,7 @@ export const ManageUsers = () =>
   useEffect(() => {
     const GetUsers = async () => {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/AllUser`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/AllUser`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,
@@ -55,7 +52,7 @@ export const ManageUsers = () =>
     if (!window.confirm("Are you sure you want to delete this user?")) return;
   
     try {
-      const response = await fetch(`${RENDER_BACK}/api/User`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${token}`,

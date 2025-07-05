@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "../components-css/Bookcard.css";
 import Cookies from "js-cookie";
-import {formatIndianNumberWithoutDecimal} from "../utils/formatIndianNumber"
+import {formatIndianNumberWithoutDecimal} from "../utils/formatIndianNumber";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const Bookcard = ({ book }) => {
     const token = Cookies.get("token");
@@ -21,7 +20,7 @@ export const Bookcard = ({ book }) => {
         }
         else{
             try {
-                const response = await fetch(`${RENDER_BACK}/api/Cart`, {
+                const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Cart`, {
                     method: "POST",
                     headers: {
                         authorization: `Bearer ${token}`,

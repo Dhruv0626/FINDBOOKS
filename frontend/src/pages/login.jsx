@@ -4,8 +4,6 @@ import Cookies from "js-cookie";
 import "../pages-css/Login.css";
 import { useAlert } from "../Context/AlertContext";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const Login = () => {
   const token = Cookies.get("token");
   const [isPanelActive, setIsPanelActive] = useState(false);
@@ -50,7 +48,7 @@ export const Login = () => {
     setSendingOtp(true); // Start loading
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/registerotp`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/registerotp`,
         {
           method: "POST",
           headers: {
@@ -84,7 +82,7 @@ export const Login = () => {
 
     try {
       const res = await fetch(
-        `${RENDER_BACK}/api/verifyotp`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/verifyotp`,
         {
           method: "POST",
           headers: {
@@ -180,7 +178,7 @@ export const Login = () => {
 
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/User`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/User`,
         {
           method: "POST",
           headers: {
@@ -217,7 +215,7 @@ export const Login = () => {
 
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/login`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/login`,
         {
           method: "POST",
           headers: {

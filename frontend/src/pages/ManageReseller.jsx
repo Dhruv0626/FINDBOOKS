@@ -3,8 +3,6 @@ import "../pages-css/ManageReseller.css";
 import Cookies from "js-cookie";
 import { useAlert } from "../Context/AlertContext";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 const ManageResellers = () => {
   const token = Cookies.get("token");
   const [resellers, setResellers] = useState([]);
@@ -20,7 +18,7 @@ const ManageResellers = () => {
   const fetchResellers = async () => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/resellerbook`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/resellerbook`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -57,7 +55,7 @@ const ManageResellers = () => {
   const addpaymentdata = async (reseller_id, price, email) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/${"debit"}/codpayment`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/${"debit"}/codpayment`,
         {
           method: "POST",
           headers: {
@@ -114,7 +112,7 @@ const ManageResellers = () => {
         console.error("Invalid email or amount for reseller payment email");
       } else {
         const emailResponse = await fetch(
-          `${RENDER_BACK}/api/send-reseller-payment-email`,
+          `${import.meta.env.VITE_RENDER_BACK}/api/send-reseller-payment-email`,
           {
             method: "POST",
             headers: {

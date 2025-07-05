@@ -11,9 +11,6 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
-
 export const Navbar = () => {
   const token = Cookies.get("token");
   const [menuActive, setMenuActive] = useState(false);
@@ -26,7 +23,7 @@ export const Navbar = () => {
   useEffect(() => {
     const GetUser = async () => {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/User`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User`, {
           credentials: "include",
           headers: {
             authorization: `Bearer ${token}`,

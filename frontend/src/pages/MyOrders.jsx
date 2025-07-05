@@ -11,9 +11,6 @@ import { SiRazorpay } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import RefundPaymentForm from "../components/RefundPaymentForm";
 
-
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const MyOrders = () => {
   const [order, setOrder] = useState([]);
   const token = Cookies.get("token");
@@ -33,7 +30,7 @@ export const MyOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          `${RENDER_BACK}/api/Order`,
+          `${import.meta.env.VITE_RENDER_BACK}/api/Order`,
           {
             credentials: "include",
             headers: {
@@ -57,7 +54,7 @@ export const MyOrders = () => {
           newOrders.map(async (order) => {
             try {
               const paymentResponse = await fetch(
-                `${RENDER_BACK}/api/payment/${order._id}`,
+                `${import.meta.env.VITE_RENDER_BACK}/api/payment/${order._id}`,
                 {
                   credentials: "include",
                   headers: {
@@ -93,7 +90,7 @@ export const MyOrders = () => {
     const fetchResellerEntries = async () => {
       try {
         const response = await fetch(
-          `${RENDER_BACK}/api/SellOrders`,
+          `${import.meta.env.VITE_RENDER_BACK}/api/SellOrders`,
           {
             credentials: "include",
             headers: {
@@ -134,7 +131,7 @@ export const MyOrders = () => {
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/${orderId}/Order`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: {
@@ -175,7 +172,7 @@ export const MyOrders = () => {
                 if (resellerEntry) {
                   try {
                     const resellerResponse = await fetch(
-                      `${RENDER_BACK}/api/Pending/SellOrders`,
+                      `${import.meta.env.VITE_RENDER_BACK}/api/Pending/SellOrders`,
                       {
                         method: "PUT",
                         headers: {
@@ -201,7 +198,7 @@ export const MyOrders = () => {
                 }
                 try {
                   const cancelEmailResponse = await fetch(
-                    `${RENDER_BACK}/cancel-seller-email/${
+                    `${import.meta.env.VITE_RENDER_BACK}/cancel-seller-email/${
                       matchedBook._id
                     }`,
                     {
@@ -270,7 +267,7 @@ export const MyOrders = () => {
   const handleReturnSubmit = async (formData) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/returnorder`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/returnorder`,
         {
           method: "POST",
           credentials: "include",
@@ -289,7 +286,7 @@ export const MyOrders = () => {
 
       // Update order status to 'return-request'
       const statusUpdateResponse = await fetch(
-        `${RENDER_BACK}/api/${orderId}/Order`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: {
@@ -354,7 +351,7 @@ export const MyOrders = () => {
       }
 
       const response = await fetch(
-        `${RENDER_BACK}/api/refund/${orderId}`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/refund/${orderId}`,
         {
           method: "POST",
           headers: {
@@ -386,7 +383,7 @@ export const MyOrders = () => {
   ) => {
     try {
       const response = await fetch(
-        `${RENDER_BACK}/cancel-order`,
+        `${import.meta.env.VITE_RENDER_BACK}/cancel-order`,
         {
           method: "POST",
           headers: {
@@ -558,7 +555,7 @@ export const MyOrders = () => {
                               <div key={bookItem._id} className="book-card">
                                 <div className="book-image">
                                   <img
-                                    src={`${RENDER_BACK}/${bookItem.BookImageURL}`}
+                                    src={`${import.meta.env.VITE_RENDER_BACK}/${bookItem.BookImageURL}`}
                                     alt={bookItem.BookName}
                                   />
                                 </div>

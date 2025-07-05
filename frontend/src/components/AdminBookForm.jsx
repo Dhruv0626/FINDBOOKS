@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const AdminBookForm = ({ UserRole }) => {
   const token = Cookies.get("token");
   const navigate = useNavigate();
@@ -122,7 +120,7 @@ export const AdminBookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/Category`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Category`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

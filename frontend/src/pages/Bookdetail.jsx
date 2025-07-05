@@ -8,7 +8,6 @@ import { ShieldCheck, Star, CreditCard, Truck, Leaf } from "lucide-react";
 import { useAlert } from "../Context/AlertContext";
 import { ImBooks } from "react-icons/im";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const Bookdetail = () => {
   const token = Cookies.get("token");
@@ -52,7 +51,7 @@ export const Bookdetail = () => {
 
   const fetchAverageRating = async () => {
     try {
-      const response = await fetch(`${RENDER_BACK}/api/Ratings/average/${book._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Ratings/average/${book._id}`, {
         headers: {
           authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -74,7 +73,7 @@ export const Bookdetail = () => {
 
     setRating(currentRating);
     try {
-      const response = await fetch(`${RENDER_BACK}/api/Ratings`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Ratings`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -105,7 +104,7 @@ export const Bookdetail = () => {
       Navigate("/login");
     } else {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/Cart`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Cart`, {
           method: "POST",
           headers: {
             authorization: `Bearer ${token}`,
@@ -131,7 +130,7 @@ export const Bookdetail = () => {
       Navigate("/login");
     } else {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/Cart`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Cart`, {
           method: "POST",
           headers: {
             authorization: `Bearer ${token}`,

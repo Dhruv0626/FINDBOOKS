@@ -7,7 +7,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { HomeFeatures } from "./HomeFeature";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const Book = () => {
   const token = Cookies.get("token");
@@ -40,6 +39,7 @@ export const Book = () => {
     return () => clearInterval(interval);
   }, [isTransitioning]);
 
+
   const nextSlide = () => {
     setIsTransitioning(true);
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -65,7 +65,7 @@ export const Book = () => {
     try {
       // Fetch both book list and reseller book list at the same time
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch(`${RENDER_BACK}/api/Book`, {
+        fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Book`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -172,7 +172,7 @@ export const Book = () => {
       if (reseller) {
         try {
           await fetch(
-            `${RENDER_BACK}/api/resellerbook/${reseller._id}`,
+            `${import.meta.env.VITE_RENDER_BACK}/api/resellerbook/${reseller._id}`,
             {
               method: "DELETE",
               headers: {

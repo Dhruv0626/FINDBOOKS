@@ -5,8 +5,6 @@ import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const AdminAddUser = () => {
   const token = Cookies.get("token");
   const [user, setUser] = useState({
@@ -64,7 +62,7 @@ export const AdminAddUser = () => {
 
 
     try {
-      const response = await fetch(`${RENDER_BACK}/api/User`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,

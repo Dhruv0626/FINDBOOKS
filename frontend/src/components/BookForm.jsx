@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../components-css/BookForm.css";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 export const BookForm = ({ UserRole }) => {
   const token = Cookies.get("token");
@@ -35,7 +34,7 @@ export const BookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${RENDER_BACK}/api/Category`, {
+        const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/Category`, {
           headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -70,7 +69,7 @@ export const BookForm = ({ UserRole }) => {
 
     try {
       const response = await fetch(
-        `${RENDER_BACK}/api/${categoryId}/Subcategory`, {
+        `${import.meta.env.VITE_RENDER_BACK}/api/${categoryId}/Subcategory`, {
         headers: {
             authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

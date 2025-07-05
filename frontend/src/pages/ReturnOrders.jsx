@@ -7,7 +7,6 @@ import { useAlert } from "../Context/AlertContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const RENDER_BACK = import.meta.env.RENDER_BACK;
 
 const ReturnOrders = () => {
   const token = Cookies.get("token");
@@ -22,7 +21,7 @@ const ReturnOrders = () => {
     const fetchReturnOrders = async () => {
       try {
         const response = await fetch(
-          `${RENDER_BACK}/api/returnorder`,
+          `${import.meta.env.VITE_RENDER_BACK}/api/returnorder`,
           {
             credentials: "include",
             headers: {
@@ -52,7 +51,7 @@ const ReturnOrders = () => {
 
       // 1. Update return order status
       const response = await fetch(
-        `${RENDER_BACK}/api/returnorder/${id}`,
+        `${import.meta.env.VITE_RENDER_BACK}/api/returnorder/${id}`,
         {
           method: "PUT",
           headers: {
@@ -151,7 +150,7 @@ const ReturnOrders = () => {
                   <td>
                     {order.image_url ? (
                       <img
-                        src={`${RENDER_BACK}/${order.image_url}`}
+                        src={`${import.meta.env.VITE_RENDER_BACK}/${order.image_url}`}
                         alt={order.order_id}
                         className="image"
                       />

@@ -4,9 +4,6 @@ import "../pages-css/EditProfile.css"; // Import external CSS
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 
-
-const RENDER_BACK = import.meta.env.RENDER_BACK;
-
 export const EditProfile = () => {
   const token = Cookies.get("token");
   const location = useLocation();
@@ -37,7 +34,7 @@ export const EditProfile = () => {
     const [firstName, lastName] = formData.name.split(" "); // Split name into first and last
 
     try {
-      const response = await fetch(`${RENDER_BACK}/api/User`, {
+      const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User`, {
         method: "PUT",
         headers: {
           authorization: `Bearer ${token}`,
