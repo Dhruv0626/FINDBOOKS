@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-
+const RENDER_BACK = import.meta.env.RENDER_BACK;
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     // Function to fetch user data
     const getUser = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACK_URL}/api/User?t=${Date.now()}`, {
+            const response = await fetch(`${RENDER_BACK}}/api/User?t=${Date.now()}`, {
                 method: "GET",
                 credentials: "include",
                 headers: {
