@@ -120,7 +120,7 @@ export const ManageBooks = () => {
                         <td className="centered">{index + 1}</td>
                         <td>
                           <img
-                            src={`${import.meta.env.VITE_RENDER_BACK}/${product.BookImageURL}`}
+                            src={product.BookImageURL}
                             alt={product.BookName.length > 15
                             ? product.BookName.slice(0, 15) + "..."
                             : product.BookName}

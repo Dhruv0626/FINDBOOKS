@@ -48,7 +48,7 @@ export const Bookcard = ({ book }) => {
                     <div className="book-card-contant">
                         {book.Isoldbook ? <div className="old-lable">Resell</div> : <div className="lable">New</div>}
                         <div className="book-img">
-                            <img src={`${import.meta.env.VITE_RENDER_BACK}/${book.BookImageURL}`} alt={book.BookName} className="book-card-img"/>
+                            <img src={book.BookImageURL} alt={book.BookName} className="book-card-img"/>
                         </div>
                         <div className="book-detail">
                             <h2 className="book-name">

@@ -555,7 +555,7 @@ export const MyOrders = () => {
                               <div key={bookItem._id} className="book-card">
                                 <div className="book-image">
                                   <img
-                                    src={`${import.meta.env.VITE_RENDER_BACK}/${bookItem.BookImageURL}`}
+                                    src={bookItem.BookImageURL}
                                     alt={bookItem.BookName}
                                   />
                                 </div>

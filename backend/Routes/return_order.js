@@ -3,50 +3,42 @@ require("dotenv").config();
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const ReturnOrder = require("../Schema/ReturnOrder");
-/*
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-*/
-const multer = require("multer");
-const path = require("path");
 const Order = require("../Schema/Order");
 const User = require("../Schema/User");
 const Payment = require("../Schema/Payment");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: { user: process.env.MY_EMAIL, pass: process.env.EMAIL_PASSWORD },
-});
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
-/*
+// Cloudinary Config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configure multer for file uploads
+// Multer Cloudinary Storage
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "uploads",
-    allowed_formats: ["jpg", "png", "jpeg"],
+    folder: "return_orders",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    public_id: (req, file) => Date.now() + "-" + file.originalname,
   },
 });
-*/
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Ensure this folder exists or create it
+const upload = multer({ storage });
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MY_EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
   },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
 });
 
-const upload = multer({ storage: storage });
-
+// Create Return Order
 router.post("/returnorder", upload.single("image"), async (req, res) => {
   try {
     const { order_id, reason, additional_info } = req.body;
@@ -57,22 +49,19 @@ router.post("/returnorder", upload.single("image"), async (req, res) => {
         .json({ message: "order_id and reason are required" });
     }
 
-    // Check if a return order already exists for this order_id
+    // Prevent duplicate return request
     const existingReturnOrder = await ReturnOrder.findOne({ order_id });
     if (existingReturnOrder) {
       return res
         .status(400)
-        .json({
-          message:
-            "Return order form has already been submitted for this order.",
-        });
+        .json({ message: "Return order already submitted for this order." });
     }
 
     const newReturnOrder = new ReturnOrder({
       order_id,
       reason,
       additional_info,
-      image_url: req.file ? req.file.path : null,
+      image_url: req.file ? req.file.path || req.file.secure_url : null,
     });
 
     const savedReturnOrder = await newReturnOrder.save();
@@ -83,13 +72,11 @@ router.post("/returnorder", upload.single("image"), async (req, res) => {
   }
 });
 
-// New GET endpoint to get all return orders with user first and last name
+// Get all return orders with user details
 router.get("/returnorder", async (req, res) => {
   try {
-    // Find all return orders sorted by creation date descending
     const returnOrders = await ReturnOrder.find({}).sort({ createdAt: -1 });
 
-    // For each return order, fetch user details from Order schema
     const enrichedReturnOrders = await Promise.all(
       returnOrders.map(async (returnOrder) => {
         const order = await Order.findOne({ _id: returnOrder.order_id });
@@ -117,7 +104,7 @@ router.get("/returnorder", async (req, res) => {
   }
 });
 
-//return order email for approve or reject the return request
+// Approve or Reject Return Order
 router.put("/returnorder/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -137,13 +124,8 @@ router.put("/returnorder/:id", async (req, res) => {
       return res.status(404).json({ message: "Return order not found" });
     }
 
-    // Fetch order and user details
     const order = await Order.findOne({ _id: updatedReturnOrder.order_id });
     if (!order) {
-      console.error(
-        "Order not found for return order:",
-        updatedReturnOrder._id
-      );
       return res.status(404).json({ message: "Order not found" });
     }
 
@@ -154,24 +136,21 @@ router.put("/returnorder/:id", async (req, res) => {
         .json({ message: "Payment not found for this order" });
     }
 
-    const payment_method = payment.payment_method;
-
     const user = await User.findOne({ _id: order.User_id });
     if (!user || !user.Email) {
-      console.error("User not found or email missing for order:", order._id);
       return res
         .status(404)
         .json({ message: "User not found or email missing" });
     }
 
-    // Compose email based on status
+    // Compose email content
     let subject = "";
     let text = "";
 
     if (status === "Approved") {
       subject = "Your return order has been approved";
 
-      if (payment_method === "Razorpay") {
+      if (payment.payment_method === "Razorpay") {
         text = `Hello ${user.First_name || ""},
 
 Your return order for Order ID ${order._id} has been approved.
@@ -193,7 +172,6 @@ Best regards,
 FindBooks Team`;
       }
 
-      // Update the order's Order_Status
       await Order.findByIdAndUpdate(order._id, {
         Order_Status: "return-pending",
       });
@@ -201,9 +179,7 @@ FindBooks Team`;
       subject = "Your return order has been rejected";
       text = `Hello ${user.First_name || ""},
 
-We regret to inform you that your return order for Order ID ${
-        order._id
-      } has been rejected.
+We regret to inform you that your return order for Order ID ${order._id} has been rejected.
 
 If you have any questions, please contact our support team.
 
@@ -213,7 +189,7 @@ Best regards,
 FindBooks Team`;
     }
 
-    // Send email
+    // Send Email
     try {
       await transporter.sendMail({
         from: process.env.MY_EMAIL.trim(),
@@ -221,15 +197,14 @@ FindBooks Team`;
         subject,
         text,
       });
-      console.log("📧 Return status email sent to:", user.Email);
+      console.log("📧 Email sent to:", user.Email);
     } catch (emailError) {
-      console.error("❌ Error sending return order status email:", emailError);
-      // Continue even if email fails
+      console.error("❌ Email sending failed:", emailError);
     }
 
     res.json(updatedReturnOrder);
   } catch (error) {
-    console.error("❌ Error updating return order status:", error);
+    console.error("❌ Error updating return order:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

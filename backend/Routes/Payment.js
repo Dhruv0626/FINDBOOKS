@@ -10,7 +10,6 @@ const Book = require("../Schema/Book");
 const Reseller = require("../Schema/Reseller");
 const authenticateToken = require("../middleware/AuthMid");
 const RefundPayment = require("../Schema/RefundPayment");
-const { devNull } = require("os");
 
 // Valid order statuses
 const VALID_ORDER_STATUSES = [
@@ -20,6 +19,7 @@ const VALID_ORDER_STATUSES = [
   "Cancelled",
   "Return",
 ];
+
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
 const RAZORPAY_SECRET = process.env.RAZORPAY_SECRET;
 

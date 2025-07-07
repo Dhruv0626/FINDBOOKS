@@ -147,7 +147,7 @@ const ReturnOrders = () => {
                   <td>
                     {order.image_url ? (
                       <img
-                        src={`${import.meta.env.VITE_RENDER_BACK}/${order.image_url}`}
+                        src={order.image_url}
                         alt={order.order_id}
                         className="image"
                       />

@@ -1,44 +1,35 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
-/*
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'uploads',
-    allowed_formats: ['jpg', 'png', 'jpeg'],
-  },
-});
-*/
-
 const path = require("path");
 const Book = require("../Schema/Book");
 const Subcategory = require("../Schema/Subcategory");
 const Authmid = require("../middleware/AuthMid");
 
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
 const router = express.Router();
 
-// Multer storage setup for local storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Ensure this folder exists or create it
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+// 🔧 Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const upload = multer({ storage: storage });
+// 📦 Multer Storage with Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "books",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    public_id: (req, file) => Date.now() + "-" + file.originalname,
+  },
+});
+
+const upload = multer({ storage });
 
 router.post(
   "/:userRole/Book",
@@ -80,22 +71,17 @@ router.post(
 
     try {
       const userRole = req.params.userRole;
-      const isOld = userRole === "Admin" ? false : true;
+      const isOld = userRole !== "Admin";
 
       if (!req.userId) {
-        console.error("User ID is missing in request");
         return res.status(400).json({ error: "Unauthorized request" });
       }
 
       if (userRole === "Admin") {
-        let bookData = await Book.findOne({ ISBN: req.body.ISBN });
-        if (bookData) {
+        let existing = await Book.findOne({ ISBN: req.body.ISBN });
+        if (existing) {
           return res.status(400).json({ error: "Book with this ISBN already exists" });
         }
-      }
-
-      if (!req.body.SubCategory) {
-        return res.status(400).json({ error: "SubCategory is required" });
       }
 
       const subcategory = await Subcategory.findById(req.body.SubCategory);
@@ -103,26 +89,12 @@ router.post(
         return res.status(400).json({ error: "Invalid subcategory" });
       }
 
-      // Conditional validation for Board and Class if subcategory is "school books"
       if (subcategory.Subcategory_Name.toLowerCase() === "school books") {
-        if (!req.body.Board) {
-          return res.status(400).json({ error: "Board is required for school books" });
-        }
-        if (!["CBSE", "ICSE", "Other"].includes(req.body.Board)) {
-          return res.status(400).json({ error: "Invalid Board value" });
-        }
-        if (!req.body.Class) {
-          return res.status(400).json({ error: "Class is required for school books" });
-        }
-        if (![
-          "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6",
-          "Class 7", "Class 8", "Class 9", "Class 10", "Class 11", "Class 12"
-        ].includes(req.body.Class)) {
-          return res.status(400).json({ error: "Invalid Class value" });
-        }
+        if (!req.body.Board) return res.status(400).json({ error: "Board is required for school books" });
+        if (!req.body.Class) return res.status(400).json({ error: "Class is required for school books" });
       }
 
-      const bookImageURL = req.file ? req.file.path : "default.jpg";
+      const bookImageURL = req.file ? req.file.path || req.file.secure_url : "default.jpg";
 
       const book = new Book({
         BookName: req.body.BookName,
@@ -133,7 +105,7 @@ router.post(
         Publisher: req.body.Publisher,
         Description: req.body.Description,
         Price: req.body.Price,
-        Quantity: req.body.Quantity !== undefined ? req.body.Quantity : 0,
+        Quantity: req.body.Quantity || 0,
         ISBN: req.body.ISBN,
         Condition: req.body.Condition,
         Subcategory_id: subcategory._id,
@@ -185,18 +157,8 @@ router.put(
     body("SubCategory").optional().notEmpty().withMessage("Subcategory is required"),
     body("Board").optional().isIn(["CBSE", "ICSE", "Other"]).withMessage("Invalid Board value"),
     body("Class").optional().isIn([
-      "Class 1",
-      "Class 2",
-      "Class 3",
-      "Class 4",
-      "Class 5",
-      "Class 6",
-      "Class 7",
-      "Class 8",
-      "Class 9",
-      "Class 10",
-      "Class 11",
-      "Class 12",
+      "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6",
+      "Class 7", "Class 8", "Class 9", "Class 10", "Class 11", "Class 12",
     ]).withMessage("Invalid Class value"),
   ],
   async (req, res) => {
@@ -207,14 +169,13 @@ router.put(
 
     try {
       const { bookId, ...updatedFields } = req.body;
-
       let book = await Book.findById(bookId);
       if (!book) {
         return res.status(404).json({ error: "Book not found" });
       }
 
       if (req.file) {
-        updatedFields.BookImageURL = req.file.path;
+        updatedFields.BookImageURL = req.file.path || req.file.secure_url;
       }
 
       if (updatedFields.SubCategory) {
@@ -223,13 +184,6 @@ router.put(
           return res.status(400).json({ error: "Invalid subcategory" });
         }
         updatedFields.Subcategory_id = subcategory._id;
-      }
-
-      if (updatedFields.Board !== undefined) {
-        updatedFields.Board = updatedFields.Board;
-      }
-      if (updatedFields.Class !== undefined) {
-        updatedFields.Class = updatedFields.Class;
       }
 
       book = await Book.findByIdAndUpdate(bookId, updatedFields, { new: true });
@@ -254,7 +208,6 @@ router.delete(
 
     try {
       const { bookId } = req.body;
-
       const book = await Book.findByIdAndDelete(bookId);
       if (!book) {
         return res.status(404).json({ error: "Book not found" });
@@ -270,15 +223,13 @@ router.delete(
 
 router.get("/:Subcategoryname/Books", async (req, res) => {
   try {
-      const name = req.params.Subcategoryname; 
-      const subcategory = await Subcategory.findOne({Subcategory_Name:name}) ;
-      const books = await Book.find({ Subcategory_id: subcategory._id });
-      res.json(books);
+    const name = req.params.Subcategoryname;
+    const subcategory = await Subcategory.findOne({ Subcategory_Name: name });
+    const books = await Book.find({ Subcategory_id: subcategory._id });
+    res.json(books);
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
-
-
 
 module.exports = router;

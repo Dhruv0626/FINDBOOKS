@@ -170,7 +170,7 @@ export const SellOrders = () => {
                             <div className="book-card">
                               <div className="book-image">
                                 <img
-                                  src={`${import.meta.env.VITE_RENDER_BACK}${bookdata.BookImageURL}`}
+                                  src={bookdata.BookImageURL}
                                   alt={bookdata.BookName}
                                 />
                               </div>
