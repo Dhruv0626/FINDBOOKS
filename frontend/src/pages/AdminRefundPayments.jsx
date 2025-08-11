@@ -152,7 +152,7 @@ const AdminRefundPayments = () => {
                       <td>{item.refund_status}</td>
                       <td>{item.user_name || "N/A"}</td>
                       <td>{item.reason || "N/A"}</td>
-                      <td>₹{item.total_payment.toFixed(2) || "N/A"}</td>
+                      <td>₹{Number(item.total_payment || 0).toFixed(2)}</td>
                       <td>{item.razorpay_refund_id || "-"}</td>
                       <td>{item.upi_id || "N/A"}</td>
                       <td>{item.bank_acc_no || "N/A"}</td>
