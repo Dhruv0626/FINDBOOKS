@@ -1,0 +1,199 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI&family=Tahoma&family=Geneva&family=Verdana&display=swap');
+
+/* General Container Styles */
+.payments-container {
+  padding: 2%;
+  background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(57, 73, 171, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(26, 35, 126, 0.05) 0%,
+      transparent 50%
+    );
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  margin: 20px auto;
+}
+
+.payments-container:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Heading Styles */
+.payments-container h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #1a237e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(26, 35, 126, 0.3);
+  transition: color 0.3s ease;
+}
+
+.payments-container h2:hover {
+  color: #3949ab;
+}
+
+/* Search Input */
+.refundsearch-input {
+  width: 100%;
+  max-width: 40%;
+  padding: 10px 15px;
+  border: 2px solid #1a237e;
+  border-radius: 8px;
+  margin-left: 30%;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-refund-btn{
+      background-color: #3b5de7;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(59, 93, 231, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-refund-btn:hover{
+      background-color: #2a47c7;
+    box-shadow: 0 6px 14px rgba(42, 71, 199, 0.8);
+}
+
+.refundsearch-input:focus {
+  border-color: #3949ab;
+  box-shadow: 0 0 8px rgba(57, 73, 171, 0.5);
+}
+
+.refundsearch-input:focus-visible {
+  outline: 2px solid #3949ab;
+  outline-offset: 2px;
+  user-select: none;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.table-wrapper:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+/* Payments Table Styling */
+.payments-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.payments-table:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+/* Table Header */
+.payments-table thead {
+  background: linear-gradient(45deg, #3949ab, #1a237e);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.payments-table th,
+.payments-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 14px 18px;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  border-right: 1px solid #ddd;
+}
+
+/* Zebra Striping */
+.payments-table tbody tr:nth-child(even) {
+  background-color: #f4f6ff;
+}
+
+/* Hover Effect */
+.payments-table tbody tr:hover {
+  background-color: rgba(57, 73, 171, 0.15);
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .payments-container {
+    padding: 15px;
+  }
+
+  .refundsearch-input {
+    font-size: 14px;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .table-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.15);
+  }
+
+  .payments-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .payments-table th,
+  .payments-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payments-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .payments-table th,
+  .payments-table td {
+    font-size: 11px;
+    padding: 8px;
+  }
+}
+
+@media (min-width: 1281px) {
+  .payments-container {
+    max-width: 1400px;
+  }
+}

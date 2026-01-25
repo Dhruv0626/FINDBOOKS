@@ -1,0 +1,276 @@
+/* Overall container */
+.view-order-container {
+  max-width: 900px;
+  margin: auto;
+  margin-top: 1%;
+  min-height: 95vh;
+  padding: 25px;
+  background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Titles */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1a237e;
+  text-shadow: 1px 1px 3px rgba(26, 35, 126, 0.4);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 30px;
+  color: #283593;
+  text-shadow: 1px 1px 2px rgba(40, 53, 147, 0.3);
+}
+
+/* Order Card */
+.order-card {
+  background: #ffffffcc;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid #c5cae9;
+}
+
+.order-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 25px rgba(26, 35, 126, 0.3);
+}
+
+.order-card p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #303f9f;
+  font-weight: 600;
+}
+
+.order-card strong {
+  color: #3949ab;
+  text-shadow: 0 0 2px #7986cb;
+}
+
+/* Order Table */
+.order-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(57, 73, 171, 0.15);
+}
+
+.order-table th,
+.order-table td {
+  border: none;
+  padding: 14px 18px;
+  text-align: center;
+  font-size: 1.05rem;
+  color: #1a237e;
+  font-weight: 600;
+  border-right: 1px solid #ddd;
+}
+
+.order-table th {
+  background: #3949ab;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-table tbody tr {
+  background: #e8eaf6;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(57, 73, 171, 0.1);
+}
+
+.order-table tbody tr:hover {
+  background: #c5cae9;
+  box-shadow: 0 4px 15px rgba(57, 73, 171, 0.3);
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.update-button,
+.cancel-button {
+  padding: 14px 22px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(57, 73, 171, 0.2);
+}
+
+.update-button {
+  background: #43a047;
+  color: white;
+}
+
+.cancel-button {
+  background: #e53935;
+  color: white;
+}
+
+.update-button:hover {
+  background: #388e3c;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(56, 142, 60, 0.4);
+}
+
+.cancel-button:hover {
+  background: #d32f2f;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(211, 47, 47, 0.4);
+}
+
+/* Select Dropdown */
+select {
+  padding: 10px;
+  font-size: 1.1rem;
+  border: 1.5px solid #7986cb;
+  border-radius: 10px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #3949ab;
+  outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .view-order-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .order-card {
+    padding: 20px;
+  }
+
+  .order-table th,
+  .order-table td {
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .update-button,
+  .cancel-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .order-card {
+    padding: 15px;
+  }
+
+  .order-table th,
+  .order-table td {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  select {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .view-order-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.85rem;
+  }
+
+  .subtitle {
+    font-size: 1.45rem;
+  }
+
+  .order-card {
+    padding: 22px;
+  }
+
+  .order-table th,
+  .order-table td {
+    font-size: 1.05rem;
+    padding: 13px 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .order-card {
+    padding: 12px;
+  }
+
+  .order-table th,
+  .order-table td {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  .button-group {
+    gap: 8px;
+  }
+
+  .update-button,
+  .cancel-button {
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+}

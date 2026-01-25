@@ -1,0 +1,113 @@
+/* CSS */
+.category-container {
+  margin-top: 5.5%;
+  background-color: whitesmoke;
+  color: #0a0a0a;
+  padding: 20px;
+  z-index: 100;
+  position:absolute;
+  width: 80%;
+  margin-left: 10%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-top: 4.3%;
+  overflow-y: scroll; 
+}
+
+.category-container::-webkit-scrollbar{
+  display: none;
+}
+
+.category-header {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.category {
+  width: 22%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category h3 {
+  border-bottom: 1px solid #090909;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  column-gap: 10px;
+}
+
+.category ul li {
+  margin: 5px 0;
+  break-inside: avoid;
+  flex: 1 1 auto;
+}
+
+.category ul li a {
+  color: rgb(14, 13, 13);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.category ul li a:hover {
+  color: linear-gradient(45deg, #ff9800, #ff5722);
+}
+
+@media screen and (max-width: 768px) {
+  
+  .category-container {
+    margin-top: 8%;
+    max-height : 70%;
+  }
+  .category {
+    width: 100%;
+  }
+  .categories{
+    display: grid;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .category-container {
+    margin-top: 12%;
+    max-height : 70%;
+  }
+  .category {
+    width: 50%;
+  }
+  .categories{
+    display: grid;
+  }
+}
+
+@media screen and (min-width : 1281px){
+  @media screen and (min-width : 1281px){
+    .category-container {
+      height : 40%;
+      margin-top : 5%;
+      width : 80%;
+      margin-left: 10%;
+    }
+  }
+}

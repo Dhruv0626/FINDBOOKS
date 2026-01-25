@@ -1,0 +1,115 @@
+/* Default Sidebar - Always Visible on Large Screens */
+.filter-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+  background: linear-gradient(180deg, #0d1a4f, #08103a);
+    color: #e0e7ff;
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(30, 40, 90, 0.3);
+    overflow-y: auto;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+  }
+  
+  /* Sidebar Hidden on Tablets & Mobile */
+  @media (max-width: 1024px) {
+    .filter-sidebar {
+      transform: translateX(-100%);
+    }
+    .filter-sidebar.open {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Sidebar Header */
+.filter-sidebar-h2 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: #cbd5e1;
+    border-bottom: 2px solid #7a8fff;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 6px #7a8fffaa;
+  }
+  
+  /* Filter Options */
+  .filter-sidebar label {
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .filter-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5a6fff;
+    color: white;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .filter-select:hover {
+    background-color: #475569;
+  }
+  
+  /* Sidebar Toggle Button (Only for Small Screens) */
+  @media (max-width: 1024px) {
+    .filter-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #1e293b;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 1100;
+      transition: background-color 0.2s ease-in-out;
+    }
+  
+    .filter-toggle:hover {
+      background-color: #334155;
+    }
+  }
+  
+  /* Close Button (Only for Small Screens) */
+  @media (max-width: 1024px) {
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  
+    .close-btn:hover {
+      color: #f8fafc;
+    }
+  }
+  
+  /* Improved Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .filter-sidebar {
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .filter-sidebar {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .filter-toggle {
+      padding: 8px 12px;
+    }
+  }

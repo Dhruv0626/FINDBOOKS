@@ -1,0 +1,130 @@
+.contact-us-page {
+    padding: 40px 30px;
+    max-width: 900px;
+    margin:auto;
+    background: linear-gradient(135deg, #f0f4f8, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-us-page::-webkit-scrollbar {
+    display: none;
+}
+
+.contact-us-title {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align:center;
+    font-size: 2.3rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.contact-us-title::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    margin: 12px auto 0;
+    border-radius: 4px;
+    box-shadow: 0 0 12px #ff5722;
+}
+
+.contact-us-content {
+    font-size: 1.3rem;
+    color: #4a4a4a;
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+.custom-p-contact-us {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    font-weight: 600;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.custom-p-contact-us:hover {
+    color: #ff5722;
+}
+
+.contact-icon {
+    color: #ff5722;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-us-page {
+        padding: 30px 20px;
+        min-height: auto;
+    }
+
+    .contact-us-title {
+        font-size: 2rem;
+    }
+
+    .contact-us-content {
+        font-size: 1.1rem;
+    }
+
+    .contact-icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-us-page {
+        padding: 20px 15px;
+        max-width: 100%;
+    }
+
+    .contact-us-title {
+        font-size: 1.75rem;
+    }
+
+    .contact-us-content {
+        font-size: 1rem;
+    }
+
+    .contact-icon {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .contact-us-page {
+        padding: 15px 10px;
+    }
+
+    .contact-us-title {
+        font-size: 1.5rem;
+    }
+
+    .contact-us-content {
+        font-size: 0.9rem;
+    }
+
+    .contact-icon {
+        font-size: 1.1rem;
+    }
+}

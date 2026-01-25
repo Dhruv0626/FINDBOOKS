@@ -1,0 +1,289 @@
+/* General Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 1); /* Dark background when scrolled */
+}
+
+/* Navbar container */
+.navbar-container {
+  width: 100%;
+  background-color: white;
+  /* color: white; */
+  position: fixed;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  background: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+  top: 0;
+  left: 0;
+}
+  
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 20px;
+  position: fixed;
+  color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Increased z-index to ensure it's above other content */
+  background: rgba(0, 0, 0, 0.6);
+  background-blend-mode: darken;
+}
+
+.webname-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5%;
+}
+
+.logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 2%;
+}
+
+.appname {
+  display: inline-flex; /* Ensures items stay on the same line */
+  align-items: center; /* Vertically aligns the text and icon */
+  white-space: nowrap; /* Prevents wrapping */
+  font-size: 1.5rem; /* Adjust to your preferred size */
+  font-weight: bold; /* Optional: Makes the text bold */
+}
+
+.appname a {
+  text-decoration: none; /* Removes underline from NavLink */
+  color: inherit; /* Ensures the link inherits the parent color */
+}
+
+
+.login{
+  margin-right: 10px;
+  width: 80px;
+}
+
+.login-btn{
+  background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+  color: white;
+  padding : 8px 8px 6px 8px;
+  font-size:large;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  width : 110%;
+  border: #ff1a1a;
+  margin-left: 17%;
+  margin-bottom: 5%;
+  border-radius: 25px;
+ 
+}
+
+.login-btn:hover{
+  background: linear-gradient(45deg, #ff5722, #ff9800);
+}
+
+.btn-div{
+  margin-left: 0;
+}
+
+.glass{
+  position: relative;
+  font-size:1.8rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  top: 10px;
+  right: 4px;
+  transform: rotate(-5deg);
+  margin-left: 0;
+  padding-left: 0;
+  letter-spacing: 2px; /* Enhances readability and elegance */
+  display: inline-flex;
+}
+
+ 
+.mobile-menu-icon {
+  display: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.menulist {
+  display: flex;
+  gap: 15px;
+  margin-right: auto;
+  width: 100%;
+  justify-content: end;
+}
+
+
+.menulist a::before{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: orange;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.menulist a:hover::before {
+  transform: scaleX(1);
+}
+
+.menulist a:hover{
+  color: #ff9800;
+}
+
+.menulist a {
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+  transition: color 0.3s;
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 900px) {
+  .mobile-menu-icon {
+    display: block;
+    margin-top : 3%;
+    margin-right: 4%;
+  }
+
+  .menulist {
+    display: none;
+    flex-direction: column;
+    gap: 25px;
+    position: absolute;
+    top: 60px;
+    left : 0;
+    margin-right: 72%;
+    background-color: white;
+    padding: 20px;
+    padding-top: 3%;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-right: 5%;
+    margin-left: 0%;
+    justify-content: start;
+    width:30%;
+  }
+
+  .login-btn{
+    margin-right: 10%;
+  }
+
+  .menulist.active {
+    display: flex;  
+  }
+
+  .navbar{
+    padding: 10px;
+  }
+
+  .menulist a {
+    color: #333;
+    font-size: 1.2rem;
+    display: flex;
+    gap:7px;
+  }
+  
+  .appname{
+    margin-top: 2%;
+  }
+
+  .logo-img{
+    margin-right: 2%;
+  }
+
+  .login-btn{
+    cursor: pointer;
+    font-size: 16px;
+    padding: 7px 7px 7px 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .appname {
+    font-size: 1.2rem;
+    margin-top: 0;
+    display: inline-flex;
+  }
+
+  .glass{
+    position: relative;
+    font-size: x-large;
+  }
+
+  .logo-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .menulist a {
+    font-size: 1rem;
+  }
+
+  .menulist{
+    margin-left: 0%;
+    justify-content: start;
+    width:40%;
+  }
+}
+
+@media screen and (min-width: 1281px){
+.navbar{
+  padding: 10px 20px;
+  height: 9%;
+}
+
+.appname a{
+  font-size: 2rem;
+  padding: 5px 0 5px 0;
+  right: 3%;
+  top: 17px;
+}
+
+.glass{
+  font-size: 2.1rem;
+  transform: rotate(-5px);
+}
+
+.menulist a {
+  font-size: 1.3rem;
+}
+
+.menulist {
+  gap : 18px;
+  display : flex;
+}
+
+.login-btn{
+  font-size: 18px;
+  padding : 8px 6px 6px 6px;
+}
+
+.login{
+  margin-right: 1%;
+  width: 100px;
+  margin-top: 0.25%;
+}
+} 
+

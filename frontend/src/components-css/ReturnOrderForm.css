@@ -1,0 +1,212 @@
+.return-order-form-container {
+  max-width: 480px;
+  margin: 1rem auto;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.return-order-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #1a237e;
+  font-weight: 700;
+  font-size: 1.75rem;
+  text-shadow: 0 1px 3px rgba(26, 35, 126, 0.3);
+}
+
+.header-icon {
+  stroke: #1a237e;
+  width: 36px;
+  height: 36px;
+}
+
+.return-order-form label {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  color: #2c387e;
+  letter-spacing: 0.02em;
+}
+
+.return-order-form select,
+.return-order-form textarea,
+.return-order-form input {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  border: 1.5px solid #aab6fe;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7);
+  background-color: #f9fbff;
+}
+
+.return-order-form select:hover,
+.return-order-form textarea:hover,
+.return-order-form input:hover {
+  border-color: #7986cb;
+}
+
+.return-order-form select:focus,
+.return-order-form textarea:focus,
+.return-order-form input:focus {
+  outline: none;
+  border-color: #3949ab;
+  box-shadow: 0 0 8px rgba(57, 73, 171, 0.6);
+  background-color: #fff;
+}
+
+.required {
+  color: #d32f2f;
+  margin-left: 0.3rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(211, 47, 47, 0.6);
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cancel-button,
+.returnsubmit-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-button {
+  background-color: #e0e0e0;
+  color: #424242;
+  box-shadow: 0 4px 10px rgba(224, 224, 224, 0.8);
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #bdbdbd;
+  box-shadow: 0 6px 14px rgba(189, 189, 189, 0.9);
+}
+
+.returnsubmit-button {
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.6);
+}
+
+.returnsubmit-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    transform: translateY(-3px);
+}
+
+.returnsubmit-button:disabled,
+.cancel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.button-icon {
+  stroke: currentColor;
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .return-order-form-container {
+    margin: 0.5rem;
+    padding: 1rem 1.25rem;
+    max-width: 100%;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .cancel-button,
+  .returnsubmit-button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .returnsubmit-button {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .return-order-form-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .form-header {
+    font-size: 1.5rem;
+  }
+
+  .cancel-button,
+  .returnsubmit-button {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .return-order-form-container {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .form-header {
+    font-size: 1.25rem;
+  }
+
+  .cancel-button,
+  .returnsubmit-button {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}

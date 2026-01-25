@@ -1,0 +1,191 @@
+.addcat-container {
+  max-width: 70%;
+  margin: 1rem auto;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f9f9f9, #e0e7ff);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.8s ease forwards;
+  color: #303f9f;
+}
+
+.addcat-form, .book-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  gap: 1rem;
+}
+
+.addcatform-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #3f51b5;
+  font-weight: 700;
+  font-size: 1.75rem;
+  text-shadow: 0 1px 3px rgba(63, 81, 181, 0.3);
+}
+
+.addsubcat-form h3 {
+  margin-top: 2%;
+  font-size: 20px;
+  color: #303f9f;
+}
+
+.addcat-form label, .book-form label {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  color: #303f9f;
+  letter-spacing: 0.02em;
+}
+
+.addcat-form input[type="text"],
+.addcat-form select,
+.addsubcat-form input[type="text"],
+.addsubcat-form select{
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  border: 1.5px solid #9fa8da;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7);
+  background-color: #fefefe;
+}
+
+.addcat-form input[type="text"]:hover,
+.addcat-form select:hover,
+.addsubcat-form input[type="text"]:hover,
+.addsubcat-form select:hover{
+  border-color: #7986cb;
+}
+
+.addcat-form input[type="text"]:focus,
+.addcat-form select:focus,
+.addsubcat-form input[type="text"]:focus,
+.addsubcat-form select:focus {
+  outline: none;
+  border-color: #303f9f;
+  box-shadow: 0 0 8px rgba(48, 63, 159, 0.6);
+  background-color: #fff;
+}
+
+.required {
+  color: #d32f2f;
+  margin-left: 0.3rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(211, 47, 47, 0.6);
+}
+
+.image-preview {
+  max-width: 200px;
+  max-height: 200px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  /* Removed flex display to center text */
+  text-align: center;
+  font-weight: 600;
+  background-color: #303f9f;
+  color: white;
+  box-shadow: 0 6px 15px rgba(48, 63, 159, 0.7);
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #283593;
+  box-shadow: 0 8px 20px rgba(40, 53, 147, 0.9);
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.uniform-input {
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .addcat-container {
+    margin: auto;
+    padding: 1rem 1.25rem;
+  }
+}
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .addcat-container {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .uniform-input, .uniform-input, .submit-button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .addcatform-header {
+      font-size: 20px;
+    }
+  
+    .addsubcat-form h3 {
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .addcat-container {
+      width: 80%;
+      margin-top: 15%;
+      padding: 10px;
+    }
+  
+    .uniform-input, .uniform-input, .submit-button {
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    .submit-button {
+      font-size: 14px;
+    }
+  
+     .addcatform-header {
+      font-size: 18px;
+    }
+  
+    .addsubcat-form h3 {
+      font-size: 16px;
+    }
+  }

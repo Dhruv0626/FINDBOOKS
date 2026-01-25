@@ -1,0 +1,174 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI&family=Tahoma&family=Geneva&family=Verdana&display=swap');
+
+/* General Container Styles */
+.return-orders-container {
+  padding: 2% 5%;
+  background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(57, 73, 171, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(26, 35, 126, 0.05) 0%,
+      transparent 50%
+    );
+  border-radius: 15px;
+  overflow-x: scroll;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  margin: 20px auto;
+}
+
+.return-orders-container:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Page Styles */
+.return-orders-page {
+  padding: 1rem;
+}
+
+/* Heading Styles */
+.return-orders-page h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #1a237e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(26, 35, 126, 0.3);
+  transition: color 0.3s ease;
+}
+
+.return-orders-page h1:hover {
+  color: #3949ab;
+}
+
+/* Table Responsive Wrapper */
+.table-responsive {
+  overflow-x: hidden; /* Removed horizontal scroll */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.table-responsive:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+/* Table Styling */
+.return-orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(26, 35, 126, 0.15);
+  transition: box-shadow 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.return-orders-table:hover {
+  box-shadow: 0 12px 30px rgba(26, 35, 126, 0.3);
+}
+
+.return-orders-table th,
+.return-orders-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 14px 18px;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  border-right: 1px solid #ddd;
+}
+
+.return-orders-table th {
+  background: linear-gradient(45deg, #3949ab, #1a237e);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 18px;
+  letter-spacing: 1.2px;
+}
+
+/* Zebra Striping */
+.return-orders-table tbody tr:nth-child(even) {
+  background-color: #f4f6ff;
+}
+
+/* Hover Effect */
+.return-orders-table tbody tr:hover {
+  background-color: rgba(57, 73, 171, 0.15);
+  cursor: pointer;
+}
+
+.image {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Action Buttons */
+.action-buttons button {
+  margin-right: 8px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  font-weight: 600;
+}
+
+.accept-button {
+  background: linear-gradient(45deg, #28a745, #218838);
+  color: white;
+}
+
+.accept-button:hover {
+  background: linear-gradient(45deg, #218838, #1e7e34);
+  box-shadow: 0 4px 12px rgba(33, 136, 56, 0.6);
+  transform: translateY(-2px);
+}
+
+.reject-button {
+  background: linear-gradient(45deg, #dc3545, #c82333);
+  color: white;
+}
+
+.reject-button:hover {
+  background: linear-gradient(45deg, #c82333, #bd2130);
+  box-shadow: 0 4px 12px rgba(198, 35, 51, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .return-orders-table th,
+  .return-orders-table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+
