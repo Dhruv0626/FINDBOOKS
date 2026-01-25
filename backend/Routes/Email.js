@@ -8,11 +8,13 @@ const Book = require("../Schema/Book");
 const Otp = require("../Schema/otp");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // TLS
   auth: {
-    user: process.env.MY_EMAIL.trim(),
-    pass: process.env.EMAIL_PASSWORD.trim(),
-  },
+    user: process.env.MY_EMAIL,
+    pass: process.env.EMAIL_PASSWORD
+  }
 });
 
 router.post("/verify-otp", async (req, res) => {
