@@ -1,13 +1,23 @@
 {
-  "name": "FindBooks",
+  "id": "/",
   "short_name": "FindBooks",
+  "name": "FindBooks Online Book Store",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
-  "serviceworker": {
-    "src": "/src/service-worker.js",
-    "scope": "/",
-    "type": "module"
-  }
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
