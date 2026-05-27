@@ -21,6 +21,24 @@ app.use(cookieparser());
 // Serve static files from uploads directory
 app.use('/uploads', express.static('uploads'));
 
+// Health check endpoint to diagnose connection issues on live site
+app.get("/api/health", (req, res) => {
+    const states = {
+        0: "disconnected",
+        1: "connected",
+        2: "connecting",
+        3: "disconnecting"
+    };
+    res.json({
+        status: "ok",
+        database: states[require("mongoose").connection.readyState] || "unknown",
+        env: {
+            hasDatabaseUrl: !!process.env.DATABASE_URL,
+            hasJwtKey: !!process.env.JWT_KEY
+        }
+    });
+});
+
 app.use("/api", require("./Routes/Auth"));
 app.use("/api", require("./Routes/BookForm"));
 app.use("/api", require("./Routes/Addcat-subCat"));

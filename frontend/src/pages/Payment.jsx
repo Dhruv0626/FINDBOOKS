@@ -8,18 +8,17 @@ import { deliveryChargesArray } from "./Useraddress";
 import Cookies from "js-cookie";
 
 export const Payment = () => {
-  const [OrderData, setOrderData] = useState();
+  const location = useLocation();
+  const Navigate = useNavigate();
+  const { total, address, cartDatas } = location.state || {};
+
+  const [OrderData, setOrderData] = useState(address);
   const [paymentMethod, setPaymentMethod] = useState("Online");
   // const [pcharge, setPcharge] = useState(0);
   const [deliveryCharge, setDeliveryCharge] = useState(0);
   const [loading, setLoading] = useState(false);
   const token = Cookies.get("token");
   const { showAlert } = useAlert();
-
-  const location = useLocation();
-  const Navigate = useNavigate();
-
-  const { total, address, cartDatas } = location.state || {};
 
   const initPayment = async (data) => {
     const options = {

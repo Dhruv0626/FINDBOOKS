@@ -143,7 +143,7 @@ export const DeliveryDetail = () => {
       showAlert("Failed to update order status. Please try again.", "error");
     }
 
-    if (paymentdetail[0].payment_method === "COD") {
+    if (paymentdetail && paymentdetail.length > 0 && paymentdetail[0].payment_method === "COD") {
       try {
         const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/codpayment`, {
           method: "PUT",

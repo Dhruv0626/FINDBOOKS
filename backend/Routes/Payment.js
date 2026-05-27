@@ -39,8 +39,12 @@ router.post("/orders", async (req, res) => {
 
     instance.orders.create(options, (error, order) => {
       if (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Something Went Wrong!" });
+        console.error("Razorpay Order Creation Error:", error);
+        return res.status(error.statusCode || 500).json({
+          message: "Razorpay order creation failed. Please verify your Razorpay API Keys in .env",
+          details: error.error ? error.error.description : "Authentication or API error",
+          code: error.error ? error.error.code : "RAZORPAY_ERROR"
+        });
       }
       res.status(200).json({
         data: {
@@ -50,7 +54,7 @@ router.post("/orders", async (req, res) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    console.error("Internal server error during order creation:", error);
     res.status(500).json({ message: "Internal Server Error!" });
   }
 });

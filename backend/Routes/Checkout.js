@@ -173,9 +173,13 @@ router.put(
         const notCollectedBooks = resellers.filter(reseller => reseller.Resell_Status !== "Collected");
 
         if (notCollectedBooks.length > 0) {
+          const notCollectedBookIds = notCollectedBooks.map(r => r.Book_id);
+          const booksDetails = await Book.find({ _id: { $in: notCollectedBookIds } });
+          const bookNames = booksDetails.map(b => b.BookName);
+
           return res.status(400).json({
             message: "Order cannot be marked as shipped until all reseller books are collected.",
-            notCollectedBooks: notCollectedBooks.map(r => r.Book_id)
+            notCollectedBooks: bookNames
           });
         }
       }

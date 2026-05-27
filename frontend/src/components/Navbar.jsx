@@ -21,6 +21,10 @@ export const Navbar = () => {
 
   useEffect(() => {
     const GetUser = async () => {
+      if (!token) {
+        setRole(null);
+        return;
+      }
       try {
         const response = await fetch(`${import.meta.env.VITE_RENDER_BACK}/api/User`, {
           credentials: "include",
@@ -31,14 +35,19 @@ export const Navbar = () => {
         });
 
         const json = await response.json();
-        const roles = json.user.Role || [];
-        setRole(roles);
+        if (json && json.user) {
+          const roles = json.user.Role || [];
+          setRole(roles);
+        } else {
+          setRole(null);
+        }
       } catch (error) {
         console.error(error);
+        setRole(null);
       }
     };
     GetUser();
-  }, []);
+  }, [token]);
 
 
   const closeMenu = () => {

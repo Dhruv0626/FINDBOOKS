@@ -26,8 +26,8 @@ export const ResellDeliveryDetail = () => {
     reselluser = [],
   } = location.state || {};
   const userdetail =
-    reselluser.find((u) => u._id === resellerdata.User_id._id) || {};
-  const booksdetail = books.find((p) => p._id === resellerdata.Book_id);
+    reselluser.find((u) => u._id === (resellerdata.User_id?._id || resellerdata.User_id)) || {};
+  const booksdetail = books.find((p) => p._id === resellerdata.Book_id) || {};
   const email = userdetail.Email || "";
 
   useEffect(() => {
