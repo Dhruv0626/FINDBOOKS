@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../pages-css/DeliveryDashboard.css";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "../Context/AdminContext";
-import Load from "../components/Load";
+import { TableSkeleton } from "../components/SkeletonLoaders";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
@@ -12,7 +12,7 @@ const DeliverypersonRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <Load />;
+    return <TableSkeleton />;
   }
 
   if (!user) {
@@ -141,7 +141,7 @@ const DeliveryDashboard = () => {
     ),
   };
 
-  if (loading) return <Load />;
+  if (loading) return <TableSkeleton />;
 
   return (
     <div className="dashboard-container">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Bookcard } from "../components/Bookcard";
 import { Searchbar } from "../components/Searchbar";
 import Load from "./Load";
+import { SkeletonCard } from "./SkeletonCard";
 import "../components-css/Bookcard.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { HomeFeatures } from "./HomeFeature";
@@ -140,7 +141,7 @@ export const Book = () => {
         )
       );
 
-      await deleteOldPendingBooks(bookData, sellOrderData.resellers);
+      deleteOldPendingBooks(bookData, sellOrderData.resellers).catch(console.error);
       setLoading(false);
     } catch (error) {
       console.error("Fetch Error:", error);
@@ -206,12 +207,6 @@ export const Book = () => {
     );
   };
 
-  if (loading)
-    return (
-      <h1>
-        <Load />
-      </h1>
-    );
   if (error) return <h1>{error.message}</h1>;
 
   return (
@@ -265,7 +260,18 @@ export const Book = () => {
         />
       </div>
 
-      {filteredBooks.length === 0 ? (
+      {loading ? (
+        <>
+          <div className="booktype">Loading...</div>
+          <section className="card-container">
+            <ul className="cards">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
+            </ul>
+          </section>
+        </>
+      ) : filteredBooks.length === 0 ? (
         <>
           {newArrivals.length > 0 && (
             <>

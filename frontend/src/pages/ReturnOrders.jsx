@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { ProfileMenu } from "../components/ProfileMenu";
 import "../pages-css/ReturnOrders.css";
-import Load from "../components/Load";
+import { TableSkeleton } from "../components/SkeletonLoaders";
 import { useAlert } from "../Context/AlertContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -113,7 +113,7 @@ const ReturnOrders = () => {
     }
   };
 
-  if (loading) return <Load />;
+  if (loading) return <div className="return-orders-page"><TableSkeleton /></div>;
 
   return (
     <div className="return-orders-page">

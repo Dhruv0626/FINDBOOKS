@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../components-css/Bookcard.css";
 import Load from "../components/Load";
+import { SkeletonCard } from "../components/SkeletonCard";
 import { Bookcard } from "../components/Bookcard";
 import { FilterComponent } from "../components/Filter";
 import Cookies from "js-cookie";
@@ -93,10 +94,15 @@ export const BooksPage = () => {
 
   if (loading) {
     return (
-      <div>
-        <h1>
-          <Load />
-        </h1>
+      <div className="bookpage-div" style={{ marginLeft: "20%", marginTop: "2%" }}>
+        <div className="booktype">Loading...</div>
+        <section className="card-container">
+          <ul className="cards" style={{ gridTemplateColumns: 'repeat(4, 230px)' }}>
+            {Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </ul>
+        </section>
       </div>
     );
   }

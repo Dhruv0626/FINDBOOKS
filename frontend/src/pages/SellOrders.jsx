@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 import "../pages-css/SellOrder.css";
 import { ProfileMenu } from "../components/ProfileMenu";
 import { Package, Calendar, CreditCard, Truck, XCircle } from "lucide-react";
-import Load from "../components/Load";
+import { OrderSkeleton } from "../components/SkeletonLoaders";
 import { useAlert } from "../Context/AlertContext";
 import Cookies from "js-cookie";
 import {formatIndianNumber} from "../utils/formatIndianNumber"
@@ -118,7 +118,14 @@ export const SellOrders = () => {
   };
 
   if (loading) {
-    return <Load />;
+    return (
+      <>
+        <Navbar />
+        <div className="sell-orders-container">
+          <OrderSkeleton />
+        </div>
+      </>
+    );
   }
 
   return (

@@ -5,7 +5,7 @@ import { Navbar } from "../components/Navbar";
 import { ProfileMenu } from "../components/ProfileMenu";
 import { useState, useEffect } from "react";
 import { Plus, Mail, Phone, User, Calendar } from "lucide-react";
-import Load from "../components/Load";
+import { ProfileSkeleton } from "../components/SkeletonLoaders";
 
 export const Profile = () => {
     const token = Cookies.get("token");
@@ -82,7 +82,7 @@ export const Profile = () => {
                 <div className="profile-container">
                     <ProfileMenu />
                     <div className="profile-page">
-                        <Load />
+                        <ProfileSkeleton />
                     </div>
                 </div>
             </>

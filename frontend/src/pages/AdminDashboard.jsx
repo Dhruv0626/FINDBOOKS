@@ -5,7 +5,7 @@ import { FaUsers } from "react-icons/fa";
 import { Navigate, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AdminContext";
-import Load from "../components/Load";
+import { DashboardSkeleton } from "../components/SkeletonLoaders";
 import Swal from "sweetalert2";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { MdReport } from "react-icons/md";
@@ -33,8 +33,8 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) {
     return (
-      <div>
-        <Load />
+      <div style={{ padding: "20px", width: "100%" }}>
+        <DashboardSkeleton />
       </div>
     );
   }

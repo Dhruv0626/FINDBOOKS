@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 import "../pages-css/MyOrders.css";
 import { ProfileMenu } from "../components/ProfileMenu";
 import { Package, Calendar, CreditCard, Truck } from "lucide-react";
-import Load from "../components/Load";
+import { OrderSkeleton } from "../components/SkeletonLoaders";
 import { useAlert } from "../Context/AlertContext";
 import ReturnOrderForm from "../components/ReturnOrderForm";
 import Cookies from "js-cookie";
@@ -440,7 +440,14 @@ export const MyOrders = () => {
   };
 
   if (loading) {
-    return <Load />;
+    return (
+      <>
+        <Navbar />
+        <div className="orders-container">
+          <OrderSkeleton />
+        </div>
+      </>
+    );
   }
 
   if (showReturnForm && selectedOrderId) {

@@ -1,3 +1,7 @@
+// Force Google DNS BEFORE anything else loads (fixes MongoDB Atlas SRV resolution)
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
